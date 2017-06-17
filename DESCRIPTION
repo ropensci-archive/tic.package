@@ -10,3 +10,4 @@ Date: 2017-06-17
 BugReports: https://github.com/krlmlr/tic.package/issues
 URL: https://github.com/krlmlr/tic.package, http://krlmlr.github.io/tic.package
 Roxygen: list(markdown = TRUE)
+Suggests: covr
