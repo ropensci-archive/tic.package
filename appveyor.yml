@@ -16,7 +16,7 @@ cache:
 
 before_build: R -q -e "tic::before_install()"
 build_script: R -q -e "tic::install()"
-after_install: R -q -e "tic::after_install()"
+after_build: R -q -e "tic::after_install()"
 before_test: R -q -e "tic::before_script()"
 test: R -q -e "tic::before_script()"
 on_success: R -q -e "tic::after_success()"
