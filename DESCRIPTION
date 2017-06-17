@@ -1,0 +1,12 @@
+Package: tic.package
+Title: Example Package for 'tic'
+Version: 0.0-0
+Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
+Description: Building a package with pkgdown documentation.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Date: 2017-06-17
+BugReports: https://github.com/krlmlr/tic.package/issues
+URL: https://github.com/krlmlr/tic.package, http://krlmlr.github.io/tic.package
+Roxygen: list(markdown = TRUE)
