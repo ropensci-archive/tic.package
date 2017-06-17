@@ -14,17 +14,17 @@ install:
 cache:
 - C:\RLibrary
 
-before_build: R -q -e 'tic::before_install()'
-build_script: R -q -e 'tic::install()'
-after_install: R -q -e 'tic::after_install()'
-before_test: R -q -e 'tic::before_script()'
-test: R -q -e 'tic::before_script()'
-on_success: R -q -e 'tic::after_success()'
-on_failure: R -q -e 'tic::after_failure()'
-before_deploy: R -q -e 'tic::before_deploy()'
-deploy_script: R -q -e 'tic::deploy()'
-after_deploy: R -q -e 'tic::after_deploy()'
-on_finish: R -q -e 'tic::after_script()'
+before_build: R -q -e "tic::before_install()"
+build_script: R -q -e "tic::install()"
+after_install: R -q -e "tic::after_install()"
+before_test: R -q -e "tic::before_script()"
+test: R -q -e "tic::before_script()"
+on_success: R -q -e "tic::after_success()"
+on_failure: R -q -e "tic::after_failure()"
+before_deploy: R -q -e "tic::before_deploy()"
+deploy_script: R -q -e "tic::deploy()"
+after_deploy: R -q -e "tic::after_deploy()"
+on_finish: R -q -e "tic::after_script()"
 
 # Adapt as necessary starting from here
 
