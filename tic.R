@@ -8,7 +8,7 @@ get_stage("script") %>%
   add_step(step_run_code(rcmdcheck::rcmdcheck()))
 
 get_stage("after_success") %>%
-  add_step(step_run_code(covr::codecov()))
+  add_step(step_run_code(covr::codecov(quiet = FALSE)))
 
 if (ci()$is_tag() && Sys.getenv("BUILD_PKGDOWN") != "") {
   get_stage("before_deploy") %>%
