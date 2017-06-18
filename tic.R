@@ -5,7 +5,7 @@ get_stage("install") %>%
   add_step(step_run_code(remotes::install_deps()))
 
 get_stage("script") %>%
-  add_step(step_run_code(rcmdcheck::rcmdcheck()))
+  add_step(step_rcmdcheck())
 
 get_stage("after_success") %>%
   add_step(step_run_code(covr::codecov(quiet = FALSE)))
