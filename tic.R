@@ -2,7 +2,7 @@ get_stage("before_install") %>%
   add_step(step_hello_world())
 
 get_stage("install") %>%
-  add_step(step_run_code(remotes::install_deps()))
+  add_step(step_run_code(remotes::install_deps(dependencies = TRUE)))
 
 get_stage("script") %>%
   add_step(step_rcmdcheck())
