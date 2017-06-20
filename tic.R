@@ -1,5 +1,5 @@
 get_stage("before_install") %>%
-  add_step(step_hello_world())
+  add_step(step_run_code(update.packages(ask = FALSE)))
 
 get_stage("install") %>%
   add_step(step_run_code(remotes::install_deps(dependencies = TRUE)))
