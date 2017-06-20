@@ -4,7 +4,7 @@
 #'
 #' @param x,y Scalar values to multiply
 #'
-#' @seealso prod
+#' @seealso [prod()]
 #'
 #' @examples
 #' multiply(2, 3)

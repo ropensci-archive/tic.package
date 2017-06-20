@@ -17,5 +17,5 @@ multiply(2, 3)
 
 }
 \seealso{
-prod
+\code{\link[=prod]{prod()}}
 }
