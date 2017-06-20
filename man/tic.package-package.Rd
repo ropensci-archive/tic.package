@@ -11,6 +11,10 @@ Building a package with pkgdown documentation.
 \details{
 For demonstration of the \pkg{tic} package.
 }
+\examples{
+# Show timestamp
+Sys.time()
+}
 \seealso{
 Useful links:
 \itemize{
