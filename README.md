@@ -2,8 +2,9 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/krlmlr/tic.package.svg?branch=master)](https://travis-ci.org/krlmlr/tic.package) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/tic.package?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/tic-package) [![Coverage Status](https://codecov.io/gh/krlmlr/tic.package/branch/master/graph/badge.svg)](https://codecov.io/github/krlmlr/tic.package?branch=master)
 
-A minimal example package with pkgdown documentation created and uploaded by tic.
-The documentation is written to, and served from, the `docs` directory of the `master` branch.
+A minimal example package with `pkgdown` documentation created and uploaded by [tic](https://github.com/ropenscilabs/tic) (the `pkgdown` documentation is written to, and served from, the `docs` directory of the `master` branch.).
+`tic` is an R package for CI-agnostic workflow definitions for various R projects. 
+See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
 
 # How to use this example repo as the base for your own R package
 
