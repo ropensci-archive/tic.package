@@ -5,9 +5,9 @@
 A minimal example package with pkgdown documentation created and uploaded by tic.
 The documentation is written to, and served from, the `docs` directory of the `master` branch.
 
-# How to use this example as the base for your own R package
+# How to use this example repo as the base for your own R package
 
-Two ways exists:  
+Two ways exist:  
 1. By forking this repo and adapting it to your needs  
 2. By starting from scratch locally and going step by step
 
@@ -27,7 +27,7 @@ Looking here can be useful if you already have an R package and just want to add
 
 ```r
 usethis::create_package("~/git/tic.package")
-✔ Changing active project to '/home/pjs/git/tic.package'
+✔ Changing active project to '/home/<username>/git/tic.package'
 ✔ Creating 'R/'
 ✔ Creating 'man/'
 ✔ Writing 'DESCRIPTION'
@@ -41,7 +41,7 @@ usethis::create_package("~/git/tic.package")
 2. Initialize `git` using `usethis::use_git()`:
 
 ```
-✔ Changing active project to '/home/pjs/git/tic.package'
+✔ Changing active project to '/home/<username>/git/tic.package'
 ✔ Initialising Git repo
 ✔ Adding '.Rhistory', '.RData' to '.gitignore'
 OK to make an initial commit of 5 files?
@@ -63,7 +63,7 @@ Selection: 1
 3. Use `roxygen2` in markdown format for package documentation: `usethis::use_roxygen_md()`
 
 ```r
-✔ Changing active project to '/home/pjs/git/tic.package'
+✔ Changing active project to '/home/<username>/git/tic.package'
 ✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
 ✔ Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'
 ● Run `devtools::document()`
@@ -72,7 +72,7 @@ Selection: 1
 4. Add the license: `usethis::add_gpl3_license()` (or any license of your choice):
 
 ```r
-✔ Changing active project to '/home/pjs/git/tic.package'
+✔ Changing active project to '/home/<username>/git/tic.package'
 ✔ Setting License field in DESCRIPTION to 'GPL-3'
 ✔ Writing 'LICENSE.md'
 ✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
@@ -93,8 +93,8 @@ Selection: 2
 ✔ Creating GitHub repository
 ✔ Adding GitHub remote
 ✔ Adding GitHub links to DESCRIPTION
-✔ Setting URL field in DESCRIPTION to 'https://github.com/pat-s/tic.package'
-✔ Setting BugReports field in DESCRIPTION to 'https://github.com/pat-s/tic.package/issues'
+✔ Setting URL field in DESCRIPTION to 'https://github.com/<user>/tic.package'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/<user>/tic.package/issues'
 ✔ Pushing to GitHub and setting remote tracking branch
 ```
 
@@ -105,7 +105,7 @@ Authenticating with GitHub
 Waiting for authentication in browser...
 Press Esc/Ctrl + C to abort
 Authentication complete.
-✔ Changing active project to '/home/pjs/git/tic.package'
+✔ Changing active project to '/home/<username>/git/tic.package'
 Authenticating with Travis
 Authenticating with GitHub
 Waiting for authentication in browser...
@@ -114,7 +114,7 @@ Authentication complete.
 Finished initiating sync with GitHub.
 Waiting for sync with GitHub....
 Finished sync with GitHub.
-Finished activating repo pat-s/tic.package on Travis CI.
+Finished activating repo <user>/tic.package on Travis CI.
 Added .travis.yml from template.
 ✔ Adding '^\\.travis\\.yml$' to '.Rbuildignore'
 Added appveyor.yml from template.
@@ -125,14 +125,14 @@ Authenticating with GitHub
 Waiting for authentication in browser...
 Press Esc/Ctrl + C to abort
 Authentication complete.
-Finished adding deploy keys on GitHub for repo pat-s/tic.package.
-Successfully added public deploy key 'travis+tic' to GitHub for pat-s/tic.package. You should receive a confirmation e-mail from GitHub. Delete the key in the repository's settings when you no longer need it.
-Finished adding private environment variable id_rsa to pat-s/tic.package on Travis CI.
-Successfully added private deploy key to pat-s/tic.package as secure environment variable id_rsa to Travis CI.
-Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic for pat-s/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please visit
+Finished adding deploy keys on GitHub for repo <user>/tic.package.
+Successfully added public deploy key 'travis+tic' to GitHub for <user>/tic.package. You should receive a confirmation e-mail from GitHub. Delete the key in the repository's settings when you no longer need it.
+Finished adding private environment variable id_rsa to <user>/tic.package on Travis CI.
+Successfully added private deploy key to <user>/tic.package as secure environment variable id_rsa to Travis CI.
+Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please visit
   https://github.com/settings/tokens/new
 A browser window will be opened.
 Waiting for PAT to appear on the clipboard.
 Detected PAT, clearing clipboard.
-Finished adding private environment variable GITHUB_PAT to pat-s/tic.package on Travis CI.
+Finished adding private environment variable GITHUB_PAT to <user>/tic.package on Travis CI.
 ```
