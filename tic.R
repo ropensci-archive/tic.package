@@ -13,3 +13,6 @@ if (Sys.getenv("id_rsa") != "") {
     add_step(step_build_pkgdown()) %>%
     add_step(step_push_deploy())
 }
+
+get_stage("after_success") %>%
+  add_step(covr::codecov())
