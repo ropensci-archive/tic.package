@@ -14,20 +14,20 @@ Two options exist:
 
 ## Option 1: Forking this repo
 
-1. Use `usethis::create_from_github()` within RStudio to automatically create a fork of this repo as a new RStudio project (of course you can also use the editor of your choice, this is just a recommendation). 
+1.1 Use `usethis::create_from_github()` within RStudio to automatically create a fork of this repo as a new RStudio project (of course you can also use the editor of your choice, this is just a recommendation). 
     You may need to set up your SSH credentials first. See [this guide](http://happygitwithr.com/ssh-keys.html) if you're having problems. 
     (Its definitely worth getting this function running as it saves you so much time in the future!) 
     Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -> New Project -> Version Control -> Github). 
-2. Change the DESCRIPTION file to your needs (package title, maintainer, links).
-3. Rename the `.Rproj` file and the folder of the project to the name of your package.
-4. Run `usethis::use_ci()` to set up all requirements needed for the CI integration of your package.
+1.2 Change the DESCRIPTION file to your needs (package title, maintainer, links).
+1.3 Rename the `.Rproj` file and the folder of the project to the name of your package.
+1.4 Run `usethis::use_ci()` to set up all requirements needed for the CI integration of your package.
 
 ## Option 2: Starting from scratch locally
 
 This is the detailed way going step by step from the bottom up.
-Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using `roxygen` with markdown (point 3) or enabling CI for your package (point 6).
+Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using `roxygen` with markdown (point 2.3) or enabling CI for your package (point 2.6).
 
-1. Use `usethis::create_package("<path-to-package-dir")`. 
+2.1 Use `usethis::create_package("<path-to-package-dir")`. 
     Here is an example with a package called `tic.package` stored within the `~/git/` directory:
     
     ```r
@@ -43,7 +43,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Opening new project 'tic.package' in RStudio
     ```
 
-2. Initialize `git` using `usethis::use_git()`:
+2.2 Initialize `git` using `usethis::use_git()`:
 
     ```
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -65,7 +65,7 @@ Looking here can be useful if you already have an R package and just want to add
     Selection: 1
     ```
 
-3. (Optional) Use `roxygen2` with markdown support for package documentation: `usethis::use_roxygen_md()`
+2.3 (Optional) Use `roxygen2` with markdown support for package documentation: `usethis::use_roxygen_md()`
 
     ```r
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -74,7 +74,7 @@ Looking here can be useful if you already have an R package and just want to add
     ● Run `devtools::document()`
     ```
 
-4. Add a license: `usethis::add_gpl3_license()` (or any license of your choice):
+2.4 Add a license: `usethis::add_gpl3_license()` (or any license of your choice):
 
      ```r
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -83,7 +83,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
     ```
 
-5. Create a Github repo by using `usethis::use_github()`:
+2.5. Create a Github repo by using `usethis::use_github()`:
 
     ```r
     ● Check title and description
@@ -103,7 +103,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-6. Set up Continuous Integration by using `usethis::use_ci()`
+2.6 Set up Continuous Integration by using `usethis::use_ci()`
 
      ```r
     Authenticating with GitHub
