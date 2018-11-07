@@ -11,4 +11,4 @@ BugReports: https://github.com/krlmlr/tic.package/issues
 URL: https://github.com/krlmlr/tic.package, http://krlmlr.github.io/tic.package
 Roxygen: list(markdown = TRUE)
 Suggests: testthat
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
