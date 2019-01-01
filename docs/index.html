@@ -69,7 +69,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#tic-package" class="anchor"></a>tic.package</h1></div>
 
-<p>A minimal example package with <em>pkgdown</em> documentation created and uploaded by <a href="https://github.com/ropenscilabs/tic"><em>tic</em></a> (the <em>pkgdown</em> documentation is written to, and served from, the <code>docs</code> directory of the <code>master</code> branch.). <code>tic</code> is an R package for CI-agnostic workflow definitions for various R projects. See its <a href="https://ropenscilabs.github.io/tic/">documentation</a> for more information.</p>
+<p>A minimal example package with <em>pkgdown</em> documentation created and uploaded by <a href="https://github.com/ropenscilabs/tic"><em>tic</em></a> (the <em>pkgdown</em> documentation is written to, and served from, the <code>docs</code> directory of the <code>master</code> branch.). <em>tic</em> is an R package for CI-agnostic workflow definitions for various R projects. See its <a href="https://ropenscilabs.github.io/tic/">documentation</a> for more information.</p>
 </div>
 <div id="set-up-an-operational-fork-of-this-repository" class="section level1">
 <h1 class="hasAnchor">
@@ -86,7 +86,7 @@
 <p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using <em>roxygen2</em> with Markdown (item 3) or enabling CI for your package (item 6).</p>
 <ol>
 <li>
-<p>Use <code>usethis::create_package("&lt;path-to-package-dir")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
+<p>Use <code>usethis::create_package("&lt;path-to-package-dir&gt;")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw">create_package</span>(<span class="st">"~/git/tic.package"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">✔ Creating <span class="st">'R/'</span></a>
@@ -119,7 +119,7 @@ Selection: 1
 Selection: 1</code></pre>
 </li>
 <li>
-<p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code></p>
+<p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">✔ Setting Roxygen field <span class="cf">in</span> DESCRIPTION to <span class="st">'list(markdown = TRUE)'</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">✔ Setting RoxygenNote field <span class="cf">in</span> DESCRIPTION to <span class="st">'6.0.1.9000'</span></a>
@@ -151,7 +151,7 @@ Selection: 1</code></pre>
 <a class="sourceLine" id="cb5-15" data-line-number="15">✔ Pushing to GitHub and setting remote tracking branch</a></code></pre></div>
 </li>
 <li>
-<p>Set up Continuous Integration by using <code>usethis::use_ci()</code></p>
+<p>Set up Continuous Integration by using <code>usethis::use_ci()</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">Authenticating with GitHub</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
@@ -177,15 +177,18 @@ Selection: 1</code></pre>
 <a class="sourceLine" id="cb6-23" data-line-number="23">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
 <a class="sourceLine" id="cb6-24" data-line-number="24">Authentication complete.</a>
 <a class="sourceLine" id="cb6-25" data-line-number="25">Finished adding deploy keys on GitHub <span class="cf">for</span> repo <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package.</a>
-<a class="sourceLine" id="cb6-26" data-line-number="26">Successfully added public deploy key <span class="st">'travis+tic'</span> to GitHub <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package. You should receive a confirmation e<span class="op">-</span>mail     from GitHub. Delete the key <span class="cf">in</span> the repository<span class="st">'s settings when you no longer need it.</span></a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="st">Finished adding private environment variable id_rsa to &lt;user&gt;/tic.package on Travis CI.</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="st">Successfully added private deploy key to &lt;user&gt;/tic.package as secure environment variable id_rsa to Travis CI.</span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="st">Create a personal access token, make sure that you are signed in as the correct user. The suggested description '</span>travis<span class="op">+</span>tic     <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package<span class="st">' has been copied to the clipboard. If you use this token only to avoid GitHub'</span>s rate limit, you can      leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please     visit</a>
-<a class="sourceLine" id="cb6-30" data-line-number="30"> https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>settings<span class="op">/</span>tokens<span class="op">/</span>new</a>
-<a class="sourceLine" id="cb6-31" data-line-number="31">A browser window will be opened.</a>
-<a class="sourceLine" id="cb6-32" data-line-number="32">Waiting <span class="cf">for</span> PAT to appear on the clipboard.</a>
-<a class="sourceLine" id="cb6-33" data-line-number="33">Detected PAT, clearing clipboard.</a>
-<a class="sourceLine" id="cb6-34" data-line-number="34">Finished adding private environment variable GITHUB_PAT to <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a></code></pre></div>
+<a class="sourceLine" id="cb6-26" data-line-number="26">Successfully added public deploy key <span class="st">'travis+tic'</span> to GitHub <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package. You should receive a confirmation e<span class="op">-</span>mail</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27">from GitHub. Delete the key <span class="cf">in</span> the repository<span class="st">'s settings when you no longer need it.</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="st">Finished adding private environment variable id_rsa to &lt;user&gt;/tic.package on Travis CI.</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="st">Successfully added private deploy key to &lt;user&gt;/tic.package as secure environment variable id_rsa to Travis CI.</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="st">Create a personal access token, make sure that you are signed in as the correct user. The suggested description '</span>travis<span class="op">+</span>tic </a>
+<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package<span class="st">' has been copied to the clipboard. If you use this token only to avoid GitHub'</span>s rate limit, you can  </a>
+<a class="sourceLine" id="cb6-32" data-line-number="32">leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please</a>
+<a class="sourceLine" id="cb6-33" data-line-number="33">visit https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>settings<span class="op">/</span>tokens<span class="op">/</span>new</a>
+<a class="sourceLine" id="cb6-34" data-line-number="34">A browser window will be opened.</a>
+<a class="sourceLine" id="cb6-35" data-line-number="35">Waiting <span class="cf">for</span> PAT to appear on the clipboard.</a>
+<a class="sourceLine" id="cb6-36" data-line-number="36">Detected PAT, clearing clipboard.</a>
+<a class="sourceLine" id="cb6-37" data-line-number="37">Finished adding private environment variable GITHUB_PAT to <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a></code></pre></div>
 </li>
 </ol>
 </div>
