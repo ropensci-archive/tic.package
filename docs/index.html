@@ -69,129 +69,125 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#tic-package" class="anchor"></a>tic.package</h1></div>
 
-<p>A minimal example package with <code>pkgdown</code> documentation created and uploaded by <a href="https://github.com/ropenscilabs/tic">tic</a> (the <code>pkgdown</code> documentation is written to, and served from, the <code>docs</code> directory of the <code>master</code> branch.). <code>tic</code> is an R package for CI-agnostic workflow definitions for various R projects. See its <a href="https://ropenscilabs.github.io/tic/">documentation</a> for more information.</p>
+<p>A minimal example package with <em>pkgdown</em> documentation created and uploaded by <a href="https://github.com/ropenscilabs/tic"><em>tic</em></a> (the <em>pkgdown</em> documentation is written to, and served from, the <code>docs</code> directory of the <code>master</code> branch.). <code>tic</code> is an R package for CI-agnostic workflow definitions for various R projects. See its <a href="https://ropenscilabs.github.io/tic/">documentation</a> for more information.</p>
 </div>
-<div id="how-to-use-this-example-repo-as-the-base-for-your-own-r-package" class="section level1">
+<div id="set-up-an-operational-fork-of-this-repository" class="section level1">
 <h1 class="hasAnchor">
-<a href="#how-to-use-this-example-repo-as-the-base-for-your-own-r-package" class="anchor"></a>How to use this example repo as the base for your own R package</h1>
-<p>Two options exist:</p>
+<a href="#set-up-an-operational-fork-of-this-repository" class="anchor"></a>Set up an operational fork of this repository</h1>
+<p>If you want to experiment with <em>travis</em> and <em>tic</em> in this repo, you can fork it.</p>
 <ol>
-<li>Forking this repo and adapting it to your needs<br>
-</li>
-<li>Starting from scratch and going step by step</li>
+<li>Use <code>usethis::create_from_github()</code> to automatically create a fork of this repo. If you use RStudio, a new RStudio project will open. You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if you’re having problems. (It’s definitely worth getting this function running as it saves you so much time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github).</li>
+<li>Run <code>travis::use_tic()</code> to set up all requirements needed for the CI integration of your package.</li>
 </ol>
-<div id="option-1-forking-this-repo" class="section level2">
-<h2 class="hasAnchor">
-<a href="#option-1-forking-this-repo" class="anchor"></a>Option 1: Forking this repo</h2>
-<p>1.1 Use <code>usethis::create_from_github()</code> within RStudio to automatically create a fork of this repo as a new RStudio project (of course you can also use the editor of your choice, this is just a recommendation). You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if you’re having problems. (Its definitely worth getting this function running as it saves you so much time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github). 1.2 Change the DESCRIPTION file to your needs (package title, maintainer, links). 1.3 Rename the <code>.Rproj</code> file and the folder of the project to the name of your package. 1.4 Run <code>usethis::use_ci()</code> to set up all requirements needed for the CI integration of your package.</p>
 </div>
-<div id="option-2-starting-from-scratch-locally" class="section level2">
-<h2 class="hasAnchor">
-<a href="#option-2-starting-from-scratch-locally" class="anchor"></a>Option 2: Starting from scratch locally</h2>
-<p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using <code>roxygen</code> with markdown (point 2.3) or enabling CI for your package (point 2.6).</p>
-<p>2.1 Use <code>usethis::create_package("&lt;path-to-package-dir")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="st">```</span><span class="dt">r</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="dt">usethis::create_package("~/git/tic.package")</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="dt">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">✔ Creating 'R/'</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="dt">✔ Creating 'man/'</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="dt">✔ Writing 'DESCRIPTION'</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="dt">✔ Writing 'NAMESPACE'</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="dt">✔ Writing 'tic.package.Rproj'</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="dt">✔ Adding '.Rproj.user' to '.gitignore'</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="dt">✔ Adding '^tic.package</span><span class="ch">\\</span><span class="dt">.Rproj$', '^</span><span class="ch">\\</span><span class="dt">.Rproj</span><span class="ch">\\</span><span class="dt">.user$' to '.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="dt">✔ Opening new project 'tic.package' in RStudio</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="st">```</span></a></code></pre></div>
-<p>2.2 Initialize <code>git</code> using <code>usethis::use_git()</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="st">```</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="dt">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="dt">✔ Initialising Git repo</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="dt">✔ Adding '.Rhistory', '.RData' to '.gitignore'</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="dt">OK to make an initial commit of 5 files?</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="dt">1: Yup</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="dt">2: No</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="dt">3: Absolutely not</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="dt">Selection: 1</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="dt">✔ Adding files and committing</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="dt">● A restart of RStudio is required to activate the Git pane</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="dt">● Restart now?</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="dt">1: Absolutely</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="dt">2: No way</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="dt">3: Absolutely not</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="dt">Selection: 1</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="st">```</span></a></code></pre></div>
-<p>2.3 (Optional) Use <code>roxygen2</code> with markdown support for package documentation: <code>usethis::use_roxygen_md()</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="st">```</span><span class="dt">r</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="dt">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="dt">✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="dt">✔ Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="dt">● Run </span><span class="st">`</span>devtools<span class="op">::</span><span class="kw">document</span>()<span class="st">`</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">```</span></a></code></pre></div>
-<p>2.4 Add a license: <code>usethis::add_gpl3_license()</code> (or any license of your choice):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"> <span class="st">```</span><span class="dt">r</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="dt">✔ Setting License field in DESCRIPTION to 'GPL-3'</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="dt">✔ Writing 'LICENSE.md'</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="dt">✔ Adding '^LICENSE</span><span class="ch">\\</span><span class="dt">.md$' to '.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">```</span></a></code></pre></div>
-<p>2.5. Create a Github repo by using <code>usethis::use_github()</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="st">```</span><span class="dt">r</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="dt">● Check title and description</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="dt">  Name:        tic.package</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="dt">  Description: What the Package Does (One Line, Title Case)</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="dt">Are title and description ok?</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="dt">1: No way</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="dt">2: I agree</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="dt">3: Nope</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="dt">Selection: 2</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="dt">✔ Creating GitHub repository</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="dt">✔ Adding GitHub remote</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="dt">✔ Adding GitHub links to DESCRIPTION</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="dt">✔ Setting URL field in DESCRIPTION to 'https://github.com/&lt;user&gt;/tic.package'</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="dt">✔ Setting BugReports field in DESCRIPTION to 'https://github.com/&lt;user&gt;/tic.package/issues'</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="dt">✔ Pushing to GitHub and setting remote tracking branch</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="st">```</span></a></code></pre></div>
-<p>2.6 Set up Continuous Integration by using <code>usethis::use_ci()</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"> <span class="st">```</span><span class="dt">r</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="dt">Authenticating with GitHub</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="dt">Waiting for authentication in browser...</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="dt">Press Esc/Ctrl + C to abort</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="dt">Authentication complete.</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="dt">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="dt">Authenticating with Travis</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="dt">Authenticating with GitHub</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="dt">Waiting for authentication in browser...</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="dt">Press Esc/Ctrl + C to abort</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="dt">Authentication complete.</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="dt">Finished initiating sync with GitHub.</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="dt">Waiting for sync with GitHub....</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="dt">Finished sync with GitHub.</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="dt">Finished activating repo &lt;user&gt;/tic.package on Travis CI.</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="dt">Added .travis.yml from template.</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="dt">✔ Adding '^</span><span class="ch">\\</span><span class="dt">.travis</span><span class="ch">\\</span><span class="dt">.yml$' to '.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="dt">Added appveyor.yml from template.</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="dt">✔ Adding '^appveyor</span><span class="ch">\\</span><span class="dt">.yml$' to '.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="dt">Added tic.R from template.</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="dt">✔ Adding '^tic</span><span class="ch">\\</span><span class="dt">.R$' to '.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="dt">Authenticating with GitHub</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="dt">Waiting for authentication in browser...</span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="dt">Press Esc/Ctrl + C to abort</span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="dt">Authentication complete.</span></a>
-<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="dt">Finished adding deploy keys on GitHub for repo &lt;user&gt;/tic.package.</span></a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="dt">Successfully added public deploy key 'travis+tic' to GitHub for &lt;user&gt;/tic.package. You should receive a confirmation e-mail     from GitHub. Delete the key in the repository's settings when you no longer need it.</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="dt">Finished adding private environment variable id_rsa to &lt;user&gt;/tic.package on Travis CI.</span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="dt">Successfully added private deploy key to &lt;user&gt;/tic.package as secure environment variable id_rsa to Travis CI.</span></a>
-<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="dt">Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic     for &lt;user&gt;/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can      leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please     visit</span></a>
-<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="dt">  https://github.com/settings/tokens/new</span></a>
-<a class="sourceLine" id="cb6-32" data-line-number="32"><span class="dt">A browser window will be opened.</span></a>
-<a class="sourceLine" id="cb6-33" data-line-number="33"><span class="dt">Waiting for PAT to appear on the clipboard.</span></a>
-<a class="sourceLine" id="cb6-34" data-line-number="34"><span class="dt">Detected PAT, clearing clipboard.</span></a>
-<a class="sourceLine" id="cb6-35" data-line-number="35"><span class="dt">Finished adding private environment variable GITHUB_PAT to &lt;user&gt;/tic.package on Travis CI.</span></a></code></pre></div>
-<p>```</p>
-</div>
+<div id="create-a-package-from-scratch" class="section level1">
+<h1 class="hasAnchor">
+<a href="#create-a-package-from-scratch" class="anchor"></a>Create a package from scratch</h1>
+<p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using <em>roxygen2</em> with Markdown (item 3) or enabling CI for your package (item 6).</p>
+<ol>
+<li>
+<p>Use <code>usethis::create_package("&lt;path-to-package-dir")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw">create_package</span>(<span class="st">"~/git/tic.package"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">✔ Creating <span class="st">'R/'</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">✔ Creating <span class="st">'man/'</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">✔ Writing <span class="st">'DESCRIPTION'</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">✔ Writing <span class="st">'NAMESPACE'</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">✔ Writing <span class="st">'tic.package.Rproj'</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">✔ Adding <span class="st">'.Rproj.user'</span> to <span class="st">'.gitignore'</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">✔ Adding <span class="st">'^tic.package</span><span class="ch">\\</span><span class="st">.Rproj$'</span>, <span class="st">'^</span><span class="ch">\\</span><span class="st">.Rproj</span><span class="ch">\\</span><span class="st">.user$'</span> to <span class="st">'.Rbuildignore'</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">✔ Opening new project <span class="st">'tic.package'</span> <span class="cf">in</span> RStudio</a></code></pre></div>
+</li>
+<li>
+<p>Initialize Git via <code>usethis::use_git()</code>:</p>
+<pre><code>✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
+✔ Initialising Git repo
+✔ Adding '.Rhistory', '.RData' to '.gitignore'
+OK to make an initial commit of 5 files?
+1: Yup
+2: No
+3: Absolutely not
+
+Selection: 1
+✔ Adding files and committing
+● A restart of RStudio is required to activate the Git pane
+● Restart now?
+1: Absolutely
+2: No way
+3: Absolutely not
+
+Selection: 1</code></pre>
+</li>
+<li>
+<p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">✔ Setting Roxygen field <span class="cf">in</span> DESCRIPTION to <span class="st">'list(markdown = TRUE)'</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">✔ Setting RoxygenNote field <span class="cf">in</span> DESCRIPTION to <span class="st">'6.0.1.9000'</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">● Run <span class="st">`</span><span class="dt">devtools::document()</span><span class="st">`</span></a></code></pre></div>
+</li>
+<li>
+<p>Add a license: <code>usethis::add_gpl3_license()</code> (or any license of your choice):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">✔ Setting License field <span class="cf">in</span> DESCRIPTION to <span class="st">'GPL-3'</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">✔ Writing <span class="st">'LICENSE.md'</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">✔ Adding <span class="st">'^LICENSE</span><span class="ch">\\</span><span class="st">.md$'</span> to <span class="st">'.Rbuildignore'</span></a></code></pre></div>
+</li>
+<li>
+<p>Create a Github repo by using <code>usethis::use_github()</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">● Check title and description</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  Name<span class="op">:</span><span class="st">        </span>tic.package</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  Description<span class="op">:</span><span class="st"> </span>What the Package <span class="kw">Does</span> (One Line, Title Case)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">Are title and description ok?</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>No way</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>I agree</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Nope</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">Selection<span class="op">:</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">✔ Creating GitHub repository</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">✔ Adding GitHub remote</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">✔ Adding GitHub links to DESCRIPTION</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">✔ Setting URL field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package'</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">✔ Setting BugReports field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package/issues'</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">✔ Pushing to GitHub and setting remote tracking branch</a></code></pre></div>
+</li>
+<li>
+<p>Set up Continuous Integration by using <code>usethis::use_ci()</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">Authenticating with GitHub</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">Authentication complete.</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">Authenticating with Travis</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">Authenticating with GitHub</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">Authentication complete.</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">Finished initiating sync with GitHub.</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">Waiting <span class="cf">for</span> sync with GitHub....</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">Finished sync with GitHub.</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">Finished activating repo <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">Added .travis.yml from template.</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">✔ Adding <span class="st">'^</span><span class="ch">\\</span><span class="st">.travis</span><span class="ch">\\</span><span class="st">.yml$'</span> to <span class="st">'.Rbuildignore'</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">Added appveyor.yml from template.</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">✔ Adding <span class="st">'^appveyor</span><span class="ch">\\</span><span class="st">.yml$'</span> to <span class="st">'.Rbuildignore'</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">Added tic.R from template.</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">✔ Adding <span class="st">'^tic</span><span class="ch">\\</span><span class="st">.R$'</span> to <span class="st">'.Rbuildignore'</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">Authenticating with GitHub</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">Authentication complete.</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">Finished adding deploy keys on GitHub <span class="cf">for</span> repo <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package.</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">Successfully added public deploy key <span class="st">'travis+tic'</span> to GitHub <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package. You should receive a confirmation e<span class="op">-</span>mail     from GitHub. Delete the key <span class="cf">in</span> the repository<span class="st">'s settings when you no longer need it.</span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="st">Finished adding private environment variable id_rsa to &lt;user&gt;/tic.package on Travis CI.</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="st">Successfully added private deploy key to &lt;user&gt;/tic.package as secure environment variable id_rsa to Travis CI.</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="st">Create a personal access token, make sure that you are signed in as the correct user. The suggested description '</span>travis<span class="op">+</span>tic     <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package<span class="st">' has been copied to the clipboard. If you use this token only to avoid GitHub'</span>s rate limit, you can      leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please     visit</a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"> https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>settings<span class="op">/</span>tokens<span class="op">/</span>new</a>
+<a class="sourceLine" id="cb6-31" data-line-number="31">A browser window will be opened.</a>
+<a class="sourceLine" id="cb6-32" data-line-number="32">Waiting <span class="cf">for</span> PAT to appear on the clipboard.</a>
+<a class="sourceLine" id="cb6-33" data-line-number="33">Detected PAT, clearing clipboard.</a>
+<a class="sourceLine" id="cb6-34" data-line-number="34">Finished adding private environment variable GITHUB_PAT to <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a></code></pre></div>
+</li>
+</ol>
 </div>
 
   </div>
