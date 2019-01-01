@@ -6,7 +6,16 @@ A minimal example package with _pkgdown_ documentation created and uploaded by [
 _tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
 See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
 
-# Set up an operational fork of this repository
+## Comparing to a conventional setup
+
+Only a few files are added or changed to enable integration with _tic_:
+
+- [`tic.R`](blob/master/tic.R): This file describes the CI workflow.
+- [`.travis.yml`](blob/master/.travis.yml): This file translates between CI stages of Travis CI and _tic_ stages.
+- [`appveyor.yml`](blob/master/appveyor.yml): This file translates between CI stages of AppVeyor and _tic_ stages.
+- [`.Rbuildignore`](blob/master/.Rbuildignore): The files listed above are not part of a built R package and must be excluded.
+
+## Set up an operational fork of this repository
 
 If you want to experiment with _travis_ and _tic_ in this repo, you can fork it.
 
@@ -17,7 +26,7 @@ If you want to experiment with _travis_ and _tic_ in this repo, you can fork it.
     Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -> New Project -> Version Control -> Github). 
 1. Run `travis::use_tic()` to set up all requirements needed for the CI integration of your package.
 
-# Create a package from scratch
+## Create a package from scratch
 
 This is the detailed way going step by step from the bottom up.
 Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using _roxygen2_ with Markdown (item 3) or enabling CI for your package (item 6).
