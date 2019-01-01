@@ -2,32 +2,27 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/krlmlr/tic.package.svg?branch=master)](https://travis-ci.org/krlmlr/tic.package) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/tic.package?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/tic-package) [![Coverage Status](https://codecov.io/gh/krlmlr/tic.package/branch/master/graph/badge.svg)](https://codecov.io/github/krlmlr/tic.package?branch=master)
 
-A minimal example package with `pkgdown` documentation created and uploaded by [tic](https://github.com/ropenscilabs/tic) (the `pkgdown` documentation is written to, and served from, the `docs` directory of the `master` branch.).
+A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
 `tic` is an R package for CI-agnostic workflow definitions for various R projects. 
 See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
 
-# How to use this example repo as the base for your own R package
+# Set up an operational fork of this repository
 
-Two options exist:  
-1. Forking this repo and adapting it to your needs  
-2. Starting from scratch and going step by step
+If you want to experiment with _travis_ and _tic_ in this repo, you can fork it.
 
-## Option 1: Forking this repo
-
-1.1 Use `usethis::create_from_github()` within RStudio to automatically create a fork of this repo as a new RStudio project (of course you can also use the editor of your choice, this is just a recommendation). 
+1. Use `usethis::create_from_github()` to automatically create a fork of this repo.
+    If you use RStudio, a new RStudio project will open. 
     You may need to set up your SSH credentials first. See [this guide](http://happygitwithr.com/ssh-keys.html) if you're having problems. 
-    (Its definitely worth getting this function running as it saves you so much time in the future!) 
+    (It's definitely worth getting this function running as it saves you so much time in the future!) 
     Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -> New Project -> Version Control -> Github). 
-1.2 Change the DESCRIPTION file to your needs (package title, maintainer, links).
-1.3 Rename the `.Rproj` file and the folder of the project to the name of your package.
-1.4 Run `usethis::use_ci()` to set up all requirements needed for the CI integration of your package.
+1. Run `travis::use_tic()` to set up all requirements needed for the CI integration of your package.
 
-## Option 2: Starting from scratch locally
+# Create a package from scratch
 
 This is the detailed way going step by step from the bottom up.
-Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using `roxygen` with markdown (point 2.3) or enabling CI for your package (point 2.6).
+Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using _roxygen2_ with Markdown (item 3) or enabling CI for your package (item 6).
 
-2.1 Use `usethis::create_package("<path-to-package-dir")`. 
+1. Use `usethis::create_package("<path-to-package-dir")`. 
     Here is an example with a package called `tic.package` stored within the `~/git/` directory:
     
     ```r
@@ -43,7 +38,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Opening new project 'tic.package' in RStudio
     ```
 
-2.2 Initialize `git` using `usethis::use_git()`:
+2. Initialize Git via `usethis::use_git()`:
 
     ```
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -65,7 +60,7 @@ Looking here can be useful if you already have an R package and just want to add
     Selection: 1
     ```
 
-2.3 (Optional) Use `roxygen2` with markdown support for package documentation: `usethis::use_roxygen_md()`
+3. (Optional) Use _roxygen2_ with Markdown support for package documentation: `usethis::use_roxygen_md()`
 
     ```r
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -74,7 +69,7 @@ Looking here can be useful if you already have an R package and just want to add
     ● Run `devtools::document()`
     ```
 
-2.4 Add a license: `usethis::add_gpl3_license()` (or any license of your choice):
+4. Add a license: `usethis::add_gpl3_license()` (or any license of your choice):
 
      ```r
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -83,7 +78,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
     ```
 
-2.5. Create a Github repo by using `usethis::use_github()`:
+5. Create a Github repo by using `usethis::use_github()`:
 
     ```r
     ● Check title and description
@@ -103,7 +98,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-2.6 Set up Continuous Integration by using `usethis::use_ci()`
+6. Set up Continuous Integration by using `usethis::use_ci()`
 
      ```r
     Authenticating with GitHub
