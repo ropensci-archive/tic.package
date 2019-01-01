@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/krlmlr/tic.package.svg?branch=master)](https://travis-ci.org/krlmlr/tic.package) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/tic.package?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/tic-package) [![Coverage Status](https://codecov.io/gh/krlmlr/tic.package/branch/master/graph/badge.svg)](https://codecov.io/github/krlmlr/tic.package?branch=master)
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
-`tic` is an R package for CI-agnostic workflow definitions for various R projects. 
+_tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
 See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
 
 # Set up an operational fork of this repository
@@ -22,7 +22,7 @@ If you want to experiment with _travis_ and _tic_ in this repo, you can fork it.
 This is the detailed way going step by step from the bottom up.
 Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using _roxygen2_ with Markdown (item 3) or enabling CI for your package (item 6).
 
-1. Use `usethis::create_package("<path-to-package-dir")`. 
+1. Use `usethis::create_package("<path-to-package-dir>")`. 
     Here is an example with a package called `tic.package` stored within the `~/git/` directory:
     
     ```r
@@ -60,7 +60,7 @@ Looking here can be useful if you already have an R package and just want to add
     Selection: 1
     ```
 
-3. (Optional) Use _roxygen2_ with Markdown support for package documentation: `usethis::use_roxygen_md()`
+3. (Optional) Use _roxygen2_ with Markdown support for package documentation: `usethis::use_roxygen_md()`:
 
     ```r
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -98,7 +98,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-6. Set up Continuous Integration by using `usethis::use_ci()`
+6. Set up Continuous Integration by using `usethis::use_ci()`:
 
      ```r
     Authenticating with GitHub
@@ -126,11 +126,14 @@ Looking here can be useful if you already have an R package and just want to add
     Press Esc/Ctrl + C to abort
     Authentication complete.
     Finished adding deploy keys on GitHub for repo <user>/tic.package.
-    Successfully added public deploy key 'travis+tic' to GitHub for <user>/tic.package. You should receive a confirmation e-mail     from GitHub. Delete the key in the repository's settings when you no longer need it.
+    Successfully added public deploy key 'travis+tic' to GitHub for <user>/tic.package. You should receive a confirmation e-mail
+    from GitHub. Delete the key in the repository's settings when you no longer need it.
     Finished adding private environment variable id_rsa to <user>/tic.package on Travis CI.
     Successfully added private deploy key to <user>/tic.package as secure environment variable id_rsa to Travis CI.
-    Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic     for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can      leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please     visit
-      https://github.com/settings/tokens/new
+    Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic 
+    for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can  
+    leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please
+    visit https://github.com/settings/tokens/new
     A browser window will be opened.
     Waiting for PAT to appear on the clipboard.
     Detected PAT, clearing clipboard.
