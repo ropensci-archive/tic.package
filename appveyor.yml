@@ -11,10 +11,14 @@ install:
   - ps: Bootstrap
   - cmd: R -q -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: R -q -e "getOption('repos')"
-  - cmd: R -q -e "install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
+  - cmd: R -q -e "if (!requireNamespace('remotes')) install.packages('remotes')"
+  - cmd: R -q -e "if (!requireNamespace('curl')) install.packages('curl')"
+  - cmd: R -q -e "if (!requireNamespace('tic')) remotes::install_github('ropenscilabs/tic')"
+  - cmd: R -q -e "tic::prepare_all_stages()"
+  - cmd: R -q -e "tic::before_install()"
 
 cache:
-- C:\RLibrary
+  - C:\RLibrary
 
 before_build: R -q -e "tic::before_install()"
 build_script: R -q -e "tic::install()"
