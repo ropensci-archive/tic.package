@@ -19,19 +19,11 @@ install:
 
 cache:
   - C:\RLibrary\
-  - C:\Program Files\Pandoc\
 
 before_build: R -q -e "tic::before_install()"
 build_script: R -q -e "tic::install()"
 after_build: R -q -e "tic::after_install()"
-before_test:
- - ps: >-
-      if (-Not (Test-Path "C:\Program Files\Pandoc\")) {
-        cinst pandoc
-      }
- - ps: $env:Path += ";C:\Program Files\Pandoc\"
- - pandoc -v
- - R -q -e "tic::before_script()"
+before_test: R -q -e "tic::before_script()"
 test_script: R -q -e "tic::script()"
 on_success: R -q -e "try(tic::after_success(), silent = TRUE)"
 on_failure: R -q -e "tic::after_failure()"
