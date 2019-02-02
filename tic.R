@@ -1,4 +1,16 @@
-add_package_checks()
+if (inherits(ci(), "TravisCI")) {
+
+  get_stage("script") %>%
+    add_step(step_rcmdcheck())
+}
+
+if (inherits(ci(), "AppVeyorCI")) {
+  get_stage("script") %>%
+    add_step(step_rcmdcheck(args = c("--as-cran", "--no-manual", "--no-vignettes",
+      "--no-build-vignettes", "--no-multiarch"),
+      build_args = c("--no-build-vignettes"),
+      error_on = "error"))
+}
 
 if (Sys.getenv("id_rsa") != "") {
   # pkgdown documentation can be built optionally. Other example criteria:
