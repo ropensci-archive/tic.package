@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/tic.package.svg?branch=master)](https://travis-ci.org/ropenscilabs/tic.package) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropenscilabs/tic.package?branch=master&svg=true)](https://ci.appveyor.com/project/ropenscilabs/tic-package) [![Coverage Status](https://codecov.io/gh/ropenscilabs/tic.package/branch/master/graph/badge.svg)](https://codecov.io/github/ropenscilabs/tic.package?branch=master)
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
-_tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
+_tic_ is an R package for CI-agnostic workflow definitions for various R projects.
 See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
 
 ## Comparing to a conventional setup
@@ -15,25 +15,29 @@ Only a few files are added or changed to enable integration with _tic_:
 - [`appveyor.yml`](appveyor.yml): This file translates between CI stages of AppVeyor and _tic_ stages.
 - [`.Rbuildignore`](.Rbuildignore): The files listed above are not part of a built R package and must be excluded.
 
+
 ## Set up an operational fork of this repository
 
 If you want to experiment with _travis_ and _tic_ in this repo, you can fork it.
+Note that even though this is the short way, the created repo will always appear as a fork of this repository.
+If you want to avoid that, [create the package from scratch](#create-a-package-from-scratch).
 
 1. Use `usethis::create_from_github()` to automatically create a fork of this repo.
-    If you use RStudio, a new RStudio project will open. 
-    You may need to set up your SSH credentials first. See [this guide](http://happygitwithr.com/ssh-keys.html) if you're having problems. 
-    (It's definitely worth getting this function running as it saves you so much time in the future!) 
-    Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -> New Project -> Version Control -> Github). 
-1. Run `travis::use_tic()` to set up all requirements needed for the CI integration of your package.
+    If you use RStudio, a new RStudio project will open.
+    You may need to set up your SSH credentials first. See [this guide](http://happygitwithr.com/ssh-keys.html) if you're having problems.
+    (It's definitely worth getting this function running as it saves you so much time in the future!)
+    Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -> New Project -> Version Control -> Github).
+1. Run `use_tic()` to set up all requirements needed for the CI integration of your package.
+
 
 ## Create a package from scratch
 
 This is the detailed way going step by step from the bottom up.
 Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using _roxygen2_ with Markdown (item 3) or enabling CI for your package (item 6).
 
-1. Use `usethis::create_package("<path-to-package-dir>")`. 
+1. Use `usethis::create_package("<path-to-package-dir>")`.
     Here is an example with a package called `tic.package` stored within the `~/git/` directory:
-    
+
     ```r
     usethis::create_package("~/git/tic.package")
     ✔ Changing active project to '/home/<username>/git/tic.package'
@@ -107,7 +111,7 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-6. Set up Continuous Integration by using `usethis::use_ci()`:
+6. Set up Continuous Integration by using `use_tic()`:
 
      ```r
     Authenticating with GitHub
@@ -139,8 +143,8 @@ Looking here can be useful if you already have an R package and just want to add
     from GitHub. Delete the key in the repository's settings when you no longer need it.
     Finished adding private environment variable id_rsa to <user>/tic.package on Travis CI.
     Successfully added private deploy key to <user>/tic.package as secure environment variable id_rsa to Travis CI.
-    Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic 
-    for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can  
+    Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic
+    for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can
     leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please
     visit https://github.com/settings/tokens/new
     A browser window will be opened.
@@ -148,3 +152,4 @@ Looking here can be useful if you already have an R package and just want to add
     Detected PAT, clearing clipboard.
     Finished adding private environment variable GITHUB_PAT to <user>/tic.package on Travis CI.
 ```
+
