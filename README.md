@@ -108,44 +108,4 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-6. Set up Continuous Integration by using `usethis::use_ci()`:
-
-     ```r
-    Authenticating with GitHub
-    Waiting for authentication in browser...
-    Press Esc/Ctrl + C to abort
-    Authentication complete.
-    ✔ Changing active project to '/home/<username>/git/tic.package'
-    Authenticating with Travis
-    Authenticating with GitHub
-    Waiting for authentication in browser...
-    Press Esc/Ctrl + C to abort
-    Authentication complete.
-    Finished initiating sync with GitHub.
-    Waiting for sync with GitHub....
-    Finished sync with GitHub.
-    Finished activating repo <user>/tic.package on Travis CI.
-    Added .travis.yml from template.
-    ✔ Adding '^\\.travis\\.yml$' to '.Rbuildignore'
-    Added appveyor.yml from template.
-    ✔ Adding '^appveyor\\.yml$' to '.Rbuildignore'
-    Added tic.R from template.
-    ✔ Adding '^tic\\.R$' to '.Rbuildignore'
-    Authenticating with GitHub
-    Waiting for authentication in browser...
-    Press Esc/Ctrl + C to abort
-    Authentication complete.
-    Finished adding deploy keys on GitHub for repo <user>/tic.package.
-    Successfully added public deploy key 'travis+tic' to GitHub for <user>/tic.package. You should receive a confirmation e-mail
-    from GitHub. Delete the key in the repository's settings when you no longer need it.
-    Finished adding private environment variable id_rsa to <user>/tic.package on Travis CI.
-    Successfully added private deploy key to <user>/tic.package as secure environment variable id_rsa to Travis CI.
-    Create a personal access token, make sure that you are signed in as the correct user. The suggested description 'travis+tic 
-    for <user>/tic.package' has been copied to the clipboard. If you use this token only to avoid GitHub's rate limit, you can  
-    leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please
-    visit https://github.com/settings/tokens/new
-    A browser window will be opened.
-    Waiting for PAT to appear on the clipboard.
-    Detected PAT, clearing clipboard.
-    Finished adding private environment variable GITHUB_PAT to <user>/tic.package on Travis CI.
-```
+6. Set up Continuous Integration by using `tic::use_tic()`. Take a look at the [Getting Started](https://ropenscilabs.github.io/tic/articles/tic.html) vignette of the [tic](https://github.com/ropenscilabs/tic) package for a detailed walkthrough.
