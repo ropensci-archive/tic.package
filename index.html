@@ -150,46 +150,7 @@ Selection: 1</code></pre>
 <a class="sourceLine" id="cb5-14" data-line-number="14">✔ Setting BugReports field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package/issues'</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">✔ Pushing to GitHub and setting remote tracking branch</a></code></pre></div>
 </li>
-<li>
-<p>Set up Continuous Integration by using <code>usethis::use_ci()</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">Authenticating with GitHub</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">Authentication complete.</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">Authenticating with Travis</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">Authenticating with GitHub</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10">Authentication complete.</a>
-<a class="sourceLine" id="cb6-11" data-line-number="11">Finished initiating sync with GitHub.</a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">Waiting <span class="cf">for</span> sync with GitHub....</a>
-<a class="sourceLine" id="cb6-13" data-line-number="13">Finished sync with GitHub.</a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">Finished activating repo <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a>
-<a class="sourceLine" id="cb6-15" data-line-number="15">Added .travis.yml from template.</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16">✔ Adding <span class="st">'^</span><span class="ch">\\</span><span class="st">.travis</span><span class="ch">\\</span><span class="st">.yml$'</span> to <span class="st">'.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17">Added appveyor.yml from template.</a>
-<a class="sourceLine" id="cb6-18" data-line-number="18">✔ Adding <span class="st">'^appveyor</span><span class="ch">\\</span><span class="st">.yml$'</span> to <span class="st">'.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19">Added tic.R from template.</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">✔ Adding <span class="st">'^tic</span><span class="ch">\\</span><span class="st">.R$'</span> to <span class="st">'.Rbuildignore'</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21">Authenticating with GitHub</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22">Waiting <span class="cf">for</span> authentication <span class="cf">in</span> browser...</a>
-<a class="sourceLine" id="cb6-23" data-line-number="23">Press Esc<span class="op">/</span>Ctrl <span class="op">+</span><span class="st"> </span>C to abort</a>
-<a class="sourceLine" id="cb6-24" data-line-number="24">Authentication complete.</a>
-<a class="sourceLine" id="cb6-25" data-line-number="25">Finished adding deploy keys on GitHub <span class="cf">for</span> repo <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package.</a>
-<a class="sourceLine" id="cb6-26" data-line-number="26">Successfully added public deploy key <span class="st">'travis+tic'</span> to GitHub <span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package. You should receive a confirmation e<span class="op">-</span>mail</a>
-<a class="sourceLine" id="cb6-27" data-line-number="27">from GitHub. Delete the key <span class="cf">in</span> the repository<span class="st">'s settings when you no longer need it.</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="st">Finished adding private environment variable id_rsa to &lt;user&gt;/tic.package on Travis CI.</span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="st">Successfully added private deploy key to &lt;user&gt;/tic.package as secure environment variable id_rsa to Travis CI.</span></a>
-<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="st">Create a personal access token, make sure that you are signed in as the correct user. The suggested description '</span>travis<span class="op">+</span>tic </a>
-<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="cf">for</span> <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package<span class="st">' has been copied to the clipboard. If you use this token only to avoid GitHub'</span>s rate limit, you can  </a>
-<a class="sourceLine" id="cb6-32" data-line-number="32">leave all scopes unchecked. Then, copy the new token to the clipboard, it will be detected and applied automatically. Please</a>
-<a class="sourceLine" id="cb6-33" data-line-number="33">visit https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>settings<span class="op">/</span>tokens<span class="op">/</span>new</a>
-<a class="sourceLine" id="cb6-34" data-line-number="34">A browser window will be opened.</a>
-<a class="sourceLine" id="cb6-35" data-line-number="35">Waiting <span class="cf">for</span> PAT to appear on the clipboard.</a>
-<a class="sourceLine" id="cb6-36" data-line-number="36">Detected PAT, clearing clipboard.</a>
-<a class="sourceLine" id="cb6-37" data-line-number="37">Finished adding private environment variable GITHUB_PAT to <span class="op">&lt;</span>user<span class="op">&gt;</span><span class="er">/</span>tic.package on Travis CI.</a></code></pre></div>
-</li>
+<li><p>Set up Continuous Integration by using <code><a href="https://www.rdocumentation.org/packages/tic/topics/use_tic">tic::use_tic()</a></code>. Take a look at the <a href="https://ropenscilabs.github.io/tic/articles/tic.html">Getting Started</a> vignette of the <a href="https://github.com/ropenscilabs/tic">tic</a> package for a detailed walkthrough.</p></li>
 </ol>
 </div>
 </div>
