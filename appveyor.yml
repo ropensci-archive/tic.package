@@ -11,14 +11,9 @@ install:
   - ps: Bootstrap
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
-  - cmd: Rscript -e "if (!requireNamespace('remotes', quietly = TRUE)) install.packages('remotes')"
-  - cmd: Rscript -e "if (!requireNamespace('curl', quietly = TRUE)) install.packages('curl')"
-  - cmd: Rscript -e "if (!requireNamespace('tic', quietly = TRUE)) remotes::install_github('ropenscilabs/tic')"
-  - cmd: Rscript -e "tic::prepare_all_stages()"
-  - cmd: Rscript -e "tic::before_install()"
-
-cache:
-- C:\RLibrary\
+  - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
+  - cmd: Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
+  - cmd: Rscript -e "remotes::install_github('ropenscilabs/tic', upgrade = 'always'); print(tic::dsl_load()); tic::prepare_all_stages()"
 
 before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
@@ -39,9 +34,9 @@ on_finish: Rscript -e "tic::after_script()"
 #  - appveyor PushArtifact failure.zip
 
 environment:
-  # R_QPDF=true makes sure that R CMD check doesn't complain
-  # about a missing qpdf executable
-  R_QPDF: "true"
+  # The example below will not work for your repository,
+  # you need to encrypt your own token.
+  # Please follow https://ci.appveyor.com/tools/encrypt .
   GITHUB_PAT:
     secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
 
