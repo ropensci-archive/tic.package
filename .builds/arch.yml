@@ -17,9 +17,7 @@ sources:
   - https://git.sr.ht/~pat_s/tic.package
 tasks:
   - setup: |
-      export LC_ALL=en_US.UTF-8
-      export LANG=en_US.UTF-8
-      export LANGUAGE=en_US.UTF-8
+      localectl set-locale LANG=en_US.UTF-8
       echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' > ~/.Rprofile
       echo 'R_LIBS_USER=/home/build/packages' > ~/.Renviron
       mkdir /home/build/packages
