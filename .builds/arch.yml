@@ -1,10 +1,8 @@
 image: archlinux
 packages:
-  - g++
   - gcc
   - gdb
-  - gfortran
-  - groff-base
+  - gcc-fortran
   - openblas
   - r
   - texlive-bin
@@ -12,7 +10,6 @@ packages:
   - pandoc
   - tcl
   - tk
-  - openssl
 environment:
   R_PACKAGE: tic.package
 sources:
