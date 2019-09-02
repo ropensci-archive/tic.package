@@ -7,6 +7,7 @@ packages:
   - r
   - texlive-bin
   - wget
+  - jdk11-openjdk
   - pandoc
   - tcl
   - tk
@@ -16,10 +17,6 @@ sources:
   - https://git.sr.ht/~pat_s/tic.package
 tasks:
   - setup: |
-      echo "en_US.UTF-8 UTF-8" > loc
-      sudo cp loc /etc/locale.gen
-      sudo locale-gen --purge "en_US.UTF-8"
-      sudo /usr/sbin/update-locale LANG=en_US.UTF-8
       export LC_ALL=en_US.UTF-8
       export LANG=en_US.UTF-8
       export LANGUAGE=en_US.UTF-8
