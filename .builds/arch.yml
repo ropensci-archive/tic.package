@@ -18,7 +18,7 @@ sources:
   - https://git.sr.ht/~pat_s/tic.package
 tasks:
   - setup: |
-      sudo localectl set-locale LANG=en_US.UTF-8
+      export LANG=en_US.UTF-8
       echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' > ~/.Rprofile
       echo 'R_LIBS_USER=/home/build/packages' > ~/.Renviron
       mkdir ~/.R && echo 'CXX_STD = CXX14\n\nVER=\nCCACHE=ccache\nCC=$(CCACHE) gcc$(VER) -std=gnu99\nCXX=$(CCACHE) g++$(VER)\nC11=$(CCACHE) g++$(VER)\nC14=$(CCACHE) g++$(VER)\nFC=$(CCACHE) gfortran$(VER)\nF77=$(CCACHE) gfortran$(VER)' > ~/.R/Makevars
