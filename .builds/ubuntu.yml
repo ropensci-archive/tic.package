@@ -2,18 +2,23 @@ image: ubuntu/bionic
 packages:
   - bash-completion
   - bison
+  - ca-certificates
+  - ccache
   - debhelper
   - default-jdk
+  - ed
+  - fonts-texgyre
   - g++
   - gcc
   - gdb
   - gfortran
   - groff-base
+  - less
   - libblas-dev
   - libbz2-dev
   - libcairo2-dev
   - libcurl4-openssl-dev
-  - libxml2-dev
+  - libcurl4-openssl-dev
   - libjpeg-dev
   - liblapack-dev
   - liblzma-dev
@@ -22,13 +27,19 @@ packages:
   - libpcre3-dev
   - libpng-dev
   - libreadline-dev
+  - libssl-dev
   - libtiff5-dev
   - libx11-dev
+  - libxml2-dev
   - libxt-dev
+  - locales
   - mpack
   - pandoc
   - pandoc-citeproc
   - pandoc-data
+  - r-base
+  - r-base-dev
+  - r-recommended
   - subversion
   - tcl8.6-dev
   - texinfo
@@ -41,24 +52,14 @@ packages:
   - texlive-latex-extra
   - texlive-latex-recommended
   - tk8.6-dev
+  - vim-tiny
+  - wget
   - x11proto-core-dev
   - xauth
   - xdg-utils
   - xfonts-base
   - xvfb
   - zlib1g-dev
-  - ed
-  - less
-  - locales
-  - vim-tiny
-  - wget
-  - ca-certificates
-  - fonts-texgyre
-  - libssl-dev
-  - libcurl4-openssl-dev
-  - r-base
-  - r-base-dev
-  - r-recommended
 environment:
   R_PACKAGE: tic.package
 sources:
@@ -73,6 +74,7 @@ tasks:
       export LANG=en_US.UTF-8
       export LANGUAGE=en_US.UTF-8
       echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' > ~/.Rprofile
+      mkdir ~/.R && echo 'CXX_STD = CXX14\n\nVER=\nCCACHE=ccache\nCC=$(CCACHE) gcc$(VER) -std=gnu99\nCXX=$(CCACHE) g++$(VER)\nC11=$(CCACHE) g++$(VER)\nC14=$(CCACHE) g++$(VER)\nFC=$(CCACHE) gfortran$(VER)\nF77=$(CCACHE) gfortran$(VER)' > ~/.R/Makevars
       echo 'R_LIBS_USER=/home/build/packages' > ~/.Renviron
       mkdir /home/build/packages
       export _R_CHECK_URLS_USE_CURL_=FALSE

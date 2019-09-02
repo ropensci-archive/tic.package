@@ -1,25 +1,27 @@
 image: archlinux
 packages:
+  - ccache
   - gcc
-  - gdb
   - gcc-fortran
-  - openblas
-  - r
-  - texlive-bin
-  - wget
+  - gdb
   - jdk11-openjdk
+  - openblas
   - pandoc
+  - r
   - tcl
+  - texlive-bin
   - tk
+  - wget
 environment:
   R_PACKAGE: tic.package
 sources:
   - https://git.sr.ht/~pat_s/tic.package
 tasks:
   - setup: |
-      localectl set-locale LANG=en_US.UTF-8
+      sudo localectl set-locale LANG=en_US.UTF-8
       echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' > ~/.Rprofile
       echo 'R_LIBS_USER=/home/build/packages' > ~/.Renviron
+      CXX_STD = CXX14\n\nVER=\nCCACHE=ccache\nCC=$(CCACHE) gcc$(VER) -std=gnu99\nCXX=$(CCACHE) g++$(VER)\nC11=$(CCACHE) g++$(VER)\nC14=$(CCACHE) g++$(VER)\nFC=$(CCACHE) gfortran$(VER)\nF77=$(CCACHE) gfortran$(VER)' > $HOME/.R/Makevars
       mkdir /home/build/packages
       export _R_CHECK_URLS_USE_CURL_=FALSE
       export _R_CHECK_LENGTH_1_CONDITION_=TRUE
