@@ -1,0 +1,75 @@
+image: archlinux
+packages:
+  - g++
+  - gcc
+  - gdb
+  - gfortran
+  - groff-base
+  - openblas
+  - r
+  - texlive-bin
+  - wget
+  - pandoc
+  - tcl
+  - tk
+  - openssl
+environment:
+  R_PACKAGE: tic.package
+sources:
+  - https://git.sr.ht/~pat_s/tic.package
+tasks:
+  - setup: |
+      echo "en_US.UTF-8 UTF-8" > loc
+      sudo cp loc /etc/locale.gen
+      sudo locale-gen --purge "en_US.UTF-8"
+      sudo /usr/sbin/update-locale LANG=en_US.UTF-8
+      export LC_ALL=en_US.UTF-8
+      export LANG=en_US.UTF-8
+      export LANGUAGE=en_US.UTF-8
+      echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' > ~/.Rprofile
+      echo 'R_LIBS_USER=/home/build/packages' > ~/.Renviron
+      mkdir /home/build/packages
+      export _R_CHECK_URLS_USE_CURL_=FALSE
+      export _R_CHECK_LENGTH_1_CONDITION_=TRUE
+      export _R_CHECK_LENGTH_1_LOGIC2_=TRUE
+      export _R_CHECK_TOPLEVEL_FILES_=TRUE
+      export _R_CHECK_VC_DIRS_=TRUE
+      export _R_CHECK_TIMINGS_=10
+      export _R_CHECK_INSTALL_DEPENDS_=TRUE
+      export _R_CHECK_SUGGESTS_ONLY_=TRUE
+      export _R_CHECK_NO_RECOMMENDED_=TRUE
+      export _R_CHECK_EXECUTABLES_EXCLUSIONS_=FALSE
+      export _R_CHECK_DOC_SIZES2_=TRUE
+      export _R_CHECK_CODE_ASSIGN_TO_GLOBALENV_=TRUE
+      export _R_CHECK_CODE_ATTACH_=TRUE
+      export _R_CHECK_CODE_DATA_INTO_GLOBALENV_=TRUE
+      export _R_CHECK_CODE_USAGE_VIA_NAMESPACES_=TRUE
+      export _R_CHECK_DOT_FIRSTLIB_=TRUE
+      export _R_CHECK_DEPRECATED_DEFUNCT_=TRUE
+      export _R_CHECK_REPLACING_IMPORTS_=TRUE
+      export _R_CHECK_SCREEN_DEVICE_=stop
+      export _R_CHECK_TOPLEVEL_FILES_=TRUE
+      export _R_CHECK_S3_METHODS_NOT_REGISTERED_=TRUE
+      export _R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_=TRUE
+      export _R_CHECK_PRAGMAS_=TRUE
+      export _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
+      export _R_CHECK_COMPILATION_FLAGS_=TRUE
+      export _R_CHECK_R_DEPENDS_=warn
+      export _R_CHECK_SERIALIZATION_=TRUE
+      export _R_CHECK_R_ON_PATH_=TRUE
+      export _R_CHECK_PACKAGES_USED_IN_TESTS_USE_SUBDIRS_=TRUE
+      export _R_CHECK_SHLIB_OPENMP_FLAGS_=TRUE
+      export _R_CHECK_CONNECTIONS_LEFT_OPEN_=TRUE
+      export _R_CHECK_FUTURE_FILE_TIMESTAMPS_=TRUE
+      export _R_CHECK_AUTOCONF_=TRUE
+  - build: |
+      sudo R CMD javareconf
+      Rscript -e 'install.packages("remotes")'
+      Rscript -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always"); print(tic::dsl_load()); tic::prepare_all_stages()'
+      cd ${R_PACKAGE}
+      R -q -e 'tic::before_install()'
+      R -q -e 'tic::install()'
+      R -q -e 'tic::after_install()'
+      R -q -e 'tic::script()'
+      R -q -e 'tic::after_success()'
+      R -q -e 'tic::before_install()'
