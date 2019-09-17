@@ -7,8 +7,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Date: 2017-06-17
-BugReports: https://github.com/krlmlr/tic.package/issues
-URL: https://github.com/krlmlr/tic.package, http://krlmlr.github.io/tic.package
+BugReports: https://github.com/ropenscilabs/tic.package/issues
+URL: https://github.com/ropenscilabs/tic.package, http://ropenscilabs.github.io/tic.package
 Roxygen: list(markdown = TRUE)
 Suggests: testthat
 RoxygenNote: 6.1.1
