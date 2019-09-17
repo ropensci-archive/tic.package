@@ -59,6 +59,7 @@ tasks:
   - build: |
       export LANG=en_US.UTF-8
       sudo R CMD javareconf
+      sudo timedatectl set-timezone UTC
       Rscript -e 'install.packages("remotes")'
       cd ${R_PACKAGE}
       Rscript -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always")'
