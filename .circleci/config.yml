@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: rocker/verse
+    steps:
+      - checkout
+      - run:
+          name: Install package dependencies
+          command: R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
+          command: R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
+          command: R -q -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always"); print(tic::dsl_load()); tic::prepare_all_stages()'
+          command: R -q -e 'tic::before_install()'
+          command: R -q -e 'tic::install()'
+      - run:
+          name: Check package
+          command: cd tic.package && && R -q -e 'tic::before_script()' && R -q -e 'tic::script()'
+
