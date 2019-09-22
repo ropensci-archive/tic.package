@@ -16,4 +16,10 @@ jobs:
           name: Check package
           command: cd tic.package && R -q -e 'tic::before_script()'
           command: R -q -e 'tic::script()'
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
 
