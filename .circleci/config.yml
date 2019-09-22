@@ -14,5 +14,6 @@ jobs:
           command: R -q -e 'tic::install()'
       - run:
           name: Check package
-          command: cd tic.package && && R -q -e 'tic::before_script()' && R -q -e 'tic::script()'
+          command: cd tic.package && R -q -e 'tic::before_script()'
+          command: R -q -e 'tic::script()'
 
