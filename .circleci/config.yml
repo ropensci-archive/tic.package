@@ -39,7 +39,7 @@ jobs:
             - /usr/local/lib/R/site-library
   deploy:
     docker:
-      - image: rocker/r-base
+      - image: rocker/verse
     steps:
       - checkout
       - run: echo "$(date -d "$D" '+%d')" > /tmp/_tmp_file
