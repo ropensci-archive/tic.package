@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Install package dependencies
           command: |
-            sudo apt update
+            sudo apt update && sudo apt upgrade -y
             echo -e 'options(Ncpus = 6, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
             R -q -e 'print(parallel::detectCores())'
             R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
@@ -42,6 +42,9 @@ jobs:
       - image: rocker/r-base
     steps:
       - checkout
+      - run: echo "$(date -d "$D" '+%d')" > /tmp/_tmp_file
+      - restore_cache:
+          key: R-package-library-{{ checksum "/tmp/_tmp_file" }}
       - run:
           name: Deploy Over SSH
           command: |
