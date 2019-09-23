@@ -64,3 +64,15 @@ workflows:
           filters:
             branches:
               only: circle-ci
+# CRON job daily at 3 am in the morning
+# - runs the "build" job on the master branch
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 3 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
