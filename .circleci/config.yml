@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      id_rsa: true
     docker:
       - image: rocker/verse:3.6.1
     steps:
