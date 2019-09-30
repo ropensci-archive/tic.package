@@ -59,15 +59,9 @@ jobs:
 
 workflows:
   version: 2
-  build-and-deploy:
+  build:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: circle-ci
 # CRON job daily at 3 am in the morning
 # - runs the "build" job on the master branch
   nightly:
