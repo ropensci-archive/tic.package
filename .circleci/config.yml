@@ -37,25 +37,6 @@ jobs:
           key: R-package-library-{{ checksum "/tmp/_tmp_file" }}
           paths:
             - /usr/local/lib/R/site-library
-  deploy:
-    environment:
-      id_rsa: true
-    docker:
-      - image: rocker/verse
-    steps:
-      - checkout
-      - run: echo "$(date -d "$D" '+%d')" > /tmp/_tmp_file
-      - restore_cache:
-          key: R-package-library-{{ checksum "/tmp/_tmp_file" }}
-      - run:
-          name: Deploy Over SSH
-          command: |
-            R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
-            R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
-            R -q -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always"); print(tic::dsl_load()); tic::prepare_all_stages()'
-            R -q -e 'tic::before_deploy()'
-            R -q -e 'tic::deploy()'
-            R -q -e 'tic::after_deploy()'
 
 workflows:
   version: 2
