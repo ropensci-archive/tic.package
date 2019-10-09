@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: rocker/verse:3.6.1
+      - image: rocker/verse
     steps:
       - checkout
 
@@ -17,9 +17,7 @@ jobs:
       - run:
           name: Install package dependencies
           command: |
-            sudo apt update && sudo apt upgrade -y
             echo -e 'options(Ncpus = 6, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
-            R -q -e 'print(parallel::detectCores())'
             R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
             R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
             R -q -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always"); print(tic::dsl_load()); tic::prepare_all_stages()'
@@ -44,7 +42,7 @@ workflows:
     jobs:
       - build
 # CRON job daily at 3 am in the morning
-# - runs the "build" job on the master branch
+# - runs the "build" job on the master branch and buils the package cache
   nightly:
     triggers:
       - schedule:
