@@ -29,7 +29,7 @@ after_script: R -q -e 'tic::after_script()'
 
 # Header
 language: r
-dist: osx
+os: osx
 cache: packages
 latex: false
 
