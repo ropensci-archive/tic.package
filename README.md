@@ -1,9 +1,8 @@
 # tic.package
 
-[![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/tic.package.svg?branch=master)](https://travis-ci.org/ropenscilabs/tic.package) 
-[![Build status](https://ci.appveyor.com/api/projects/status/h2ct02622kcnhlcf/branch/master?svg=true)](https://ci.appveyor.com/project/ropensci/tic-package/branch/master)
-[![CircleCI](https://circleci.com/gh/ropenscilabs/tic.package.svg?style=svg)](https://circleci.com/gh/ropenscilabs/tic.package)
-[![Coverage Status](https://codecov.io/gh/ropenscilabs/tic.package/branch/master/graph/badge.svg)](https://codecov.io/github/ropenscilabs/tic.package?branch=master)
+[![CircleCI build status](https://img.shields.io/circleci/build/gh/ropenscilabs/tic.package/master?label=Linux&logo=circle&logoColor=green&style=flat-square)](https://circleci.com/gh/ropenscilabs/tic.package)
+[![Travis build status](https://img.shields.io/travis/ropenscilabs/tic.package/master?logo=travis&style=flat-square&label=macOS)](https://travis-ci.org/ropenscilabs/tic.package)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/ropensci/tic-package?label=Windows&logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/ropensci/tic-package)
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
 _tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
