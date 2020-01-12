@@ -18,9 +18,9 @@ Sys.time()
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/krlmlr/tic.package}
-  \item \url{http://krlmlr.github.io/tic.package}
-  \item Report bugs at \url{https://github.com/krlmlr/tic.package/issues}
+  \item \url{https://github.com/ropenscilabs/tic.package}
+  \item \url{https://ropenscilabs.github.io/tic.package}
+  \item Report bugs at \url{https://github.com/ropenscilabs/tic.package/issues}
 }
 
 }
