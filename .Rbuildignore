@@ -6,3 +6,4 @@
 ^codecov\.yml$
 ^docs$
 ^\.circleci$
+^\.github$

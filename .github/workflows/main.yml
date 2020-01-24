@@ -21,15 +21,16 @@ jobs:
         - { os: windows-latest, r: '3.6'}
         - { os: macOS-latest, r: '3.6'}
         - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-16.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+        - { os: ubuntu-18.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
+        - { os: ubuntu-18.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
+        - { os: ubuntu-18.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
+        - { os: ubuntu-18.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
+        - { os: ubuntu-18.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      MAKEFLAGS: "-j 2"
 
     steps:
       - uses: actions/checkout@v1
@@ -41,7 +42,8 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
-        run: Rscript -e "install.packages('remotes')" -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
+        run: Rscript -e "install.packages('remotes')"
+        run: Rscript -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -61,10 +63,21 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install dependencies
-        run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')"
+          run: echo -e "options(Ncpus = 8, repos = structure(c(CRAN = 'https://cloud.r-project.org/')))" > $HOME/.Rprofile
+          run: mkdir -p $HOME/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+          run: mkdir -p $HOME/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
+          run: R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
+          run: R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
+          run: R -q -e 'remotes::install_github("ropenscilabs/tic"); print(tic::dsl_load()); tic::prepare_all_stages()'
+          run: R -q -e 'tic::before_install()'
+          run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
+        run: R -q -e 'tic::script()'
+
+      - name: after_success
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
+        run: R -q -e 'tic::after_success()'
 
       - name: Upload check results
         if: failure()
@@ -73,7 +86,7 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Test coverage
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
-        run: |
-          Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+      # - name: Test coverage
+      #   if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
+      #   run: |
+      #     Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
