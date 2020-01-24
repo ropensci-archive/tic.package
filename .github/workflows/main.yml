@@ -40,9 +40,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      # - name: Query dependencies
-      #   run: Rscript -e "install.packages('remotes')" -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
-
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v1
@@ -71,12 +68,23 @@ jobs:
           Rscript -e "tic::before_install()"
           Rscript -e "tic::install()"
 
+      - name: ccache
+        if: runner.os != 'Windows'
+        run: |
+          mkdir -p $HOME/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+          mkdir -p $HOME/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
+        if: runner.os == 'macOS'
+        run: |
+          brew install ccache
+          export PATH="/usr/local/opt/ccache/libexec:$PATH"
+        if: runner.os == 'Linux'
+        run: sudo apt install ccache
+
       - name: Install dependencies
         if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
           Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) {install.packages('curl')}"
-          echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')"
           Rscript -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
