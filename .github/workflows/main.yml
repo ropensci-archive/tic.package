@@ -40,6 +40,14 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+
       # only on macOS devel, using binaries on release
       - name: ccache-mac
         if: runner.os == 'macOS' && matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
@@ -59,18 +67,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
           Rscript -e "tic::before_install()"
-
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+          Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
       - name: Check
         run: Rscript -e 'tic::script()'
