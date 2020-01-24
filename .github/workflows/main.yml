@@ -63,14 +63,14 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install dependencies
-          run: echo -e "options(Ncpus = 8, repos = structure(c(CRAN = 'https://cloud.r-project.org/')))" > $HOME/.Rprofile
-          run: mkdir -p $HOME/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
-          run: mkdir -p $HOME/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
-          run: R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
-          run: R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
-          run: R -q -e 'remotes::install_github("ropenscilabs/tic"); print(tic::dsl_load()); tic::prepare_all_stages()'
-          run: R -q -e 'tic::before_install()'
-          run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
+        run: echo -e "options(Ncpus = 8, repos = structure(c(CRAN = 'https://cloud.r-project.org/')))" > $HOME/.Rprofile
+        run: mkdir -p $HOME/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+        run: mkdir -p $HOME/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
+        run: R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
+        run: R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
+        run: R -q -e 'remotes::install_github("ropenscilabs/tic"); print(tic::dsl_load()); tic::prepare_all_stages()'
+        run: R -q -e 'tic::before_install()'
+        run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
       - name: Check
         run: R -q -e 'tic::script()'
