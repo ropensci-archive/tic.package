@@ -54,6 +54,7 @@ jobs:
       - name: ccache-mac-devel
         if: runner.os == 'macOS' && matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
+          export pkgType="source"
           brew install ccache
           export PATH="/usr/local/opt/ccache/libexec:$PATH"
 
