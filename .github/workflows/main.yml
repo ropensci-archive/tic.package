@@ -69,7 +69,7 @@ jobs:
           Rscript -e "tic::install()"
 
       - name: Install dependencies
-        if: matrix.config.r != 'devel' | (runner.os == 'Linux' & matrix.config.r != 'devel' )
+        if: matrix.config.r != 'devel' || ( runner.os == 'Linux' & matrix.config.r != 'devel' )
         run: |
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
