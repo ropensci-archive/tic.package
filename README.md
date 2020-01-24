@@ -1,8 +1,7 @@
 # tic.package
 
 [![CircleCI build status](https://img.shields.io/circleci/build/gh/ropenscilabs/tic.package/master?label=Linux&logo=circle&logoColor=green&style=flat-square)](https://circleci.com/gh/ropenscilabs/tic.package)
-[![Build status](https://ci.appveyor.com/api/projects/status/67qe2j2fyaxgk63i?svg=true)](https://ci.appveyor.com/project/ropenscilabs/tic-package)
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/ropensci/tic-package?label=Windows&logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/ropensci/tic-package)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/ropenscilabs/tic-package?label=Windows&logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/ropenscilabs/tic-package)
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
 _tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
