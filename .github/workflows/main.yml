@@ -82,9 +82,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
           Rscript -e "if (getRversion() < "3.2" && !requireNamespace('curl')) install.packages('curl')"
-          Rscript -e "remotes::install_github("ropensci/tic")" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
+          Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
           Rscript -e "tic::before_install()"
           Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
