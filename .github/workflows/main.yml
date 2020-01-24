@@ -56,11 +56,6 @@ jobs:
           key: ${{ runner.os }}-ccache-${{ matrix.config.r }}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
-      # - name: Meta non Windows
-      #   if: runner.os != 'Windows'
-      #   run: |
-      #     echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
-
       # only on macOS devel, using binaries on release
       # need to set pkgType env var, otherwise remotes::install_cran() errors
       # because R tries to install binaries for R-devel which do not exist
@@ -70,6 +65,8 @@ jobs:
           export pkgType="source"
           brew install ccache
           export PATH="/usr/local/opt/ccache/libexec:$PATH"
+          mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+          mkdir -p ~/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
           Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
           echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
@@ -94,6 +91,7 @@ jobs:
           mkdir -p ~/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
           echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
 
+      # for some strange Windows reason this step and the next one need to be decoupled
       - name: Prepare tic
         if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
