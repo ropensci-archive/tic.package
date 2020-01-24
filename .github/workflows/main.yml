@@ -6,7 +6,7 @@ on:
     branches:
       - master
 
-name: R-CMD-check
+name: Check R Package
 
 jobs:
   R-CMD-check:
@@ -82,10 +82,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          Rscript -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
-          Rscript -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
-          Rscript -e 'remotes::install_github("ropenscilabs/tic"); print(tic::dsl_load()); tic::prepare_all_stages()'
-          Rscript -e 'tic::before_install()'
+          Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
+          Rscript -e "if (getRversion() < "3.2" && !requireNamespace('curl')) install.packages('curl')"
+          Rscript -e "remotes::install_github("ropensci/tic")" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
+          Rscript -e "tic::before_install()"
           Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
       - name: Check
@@ -93,7 +93,7 @@ jobs:
 
       - name: after_success
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
-        run: Rscript -e 'tic::after_success()'
+        run: Rscript -e "tic::after_success()"
 
       - name: Upload check results
         if: failure()
