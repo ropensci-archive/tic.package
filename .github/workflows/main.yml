@@ -55,14 +55,14 @@ jobs:
       - name: Meta non Windows
         if: runner.os != 'Windows'
         run: |
-          echo -e "options(Ncpus = 8)" > $HOME/.Rprofile
+          echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
 
       - name: Install dependencies
         run: |
+          Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
           Rscript -e "tic::before_install()"
-          Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
 
       - name: Cache R packages
         if: runner.os != 'Windows'
