@@ -40,13 +40,13 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+      # - name: Cache R packages
+      #   if: runner.os != 'Windows'
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ${{ env.R_LIBS_USER }}
+      #     key: ${{ runner.os }}-r-${{ matrix.config.r }}
+      #     restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
       # - name: Meta non Windows
       #   if: runner.os != 'Windows'
