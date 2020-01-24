@@ -26,6 +26,7 @@ jobs:
         - { os: ubuntu-18.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
         - { os: ubuntu-18.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
         - { os: ubuntu-18.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
+        - { os: ubuntu-18.04, r: 'devel'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -68,8 +69,9 @@ jobs:
         run: |
           sudo apt install ccache
 
+      # only on macOS devel, using binaries on release
       - name: ccache-mac
-        if: runner.os == 'macOS'
+        if: runner.os == 'macOS' && matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
           brew install ccache
           export PATH="/usr/local/opt/ccache/libexec:$PATH"
@@ -83,9 +85,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo -e "options(Ncpus = 8, repos = structure(c(CRAN = 'https://cloud.r-project.org/')))" > $HOME/.Rprofile
-          mkdir -p $HOME/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
-          mkdir -p $HOME/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
           R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
           R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
           R -q -e 'remotes::install_github("ropenscilabs/tic"); print(tic::dsl_load()); tic::prepare_all_stages()'

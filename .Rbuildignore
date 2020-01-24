@@ -7,3 +7,4 @@
 ^docs$
 ^\.circleci$
 ^\.github$
+^depends\.Rds$
