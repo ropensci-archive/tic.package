@@ -33,6 +33,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       today: $(echo "date '+%d-%m'")
+      pkgType: source
 
     steps:
       - uses: actions/checkout@v1
@@ -58,7 +59,6 @@ jobs:
         run: echo "::set-output name=date::$(date '+%d-%m')"
 
       - name: Cache R packages
-        if: runner.os != 'Windows'
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -84,7 +84,6 @@ jobs:
       - name: "[macOS-R-devel] Install dependencies"
         if: runner.os == 'macOS' && matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
-          export pkgType="source"
           brew install ccache
           export PATH="/usr/local/opt/ccache/libexec:$PATH"
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
@@ -96,21 +95,21 @@ jobs:
           Rscript -e "tic::install()"
 
       # for some strange Windows reason this step and the next one need to be decoupled
-      - name: Prepare {tic}
+      - name: "[Stage] Prepare"
         if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
           Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) {install.packages('curl')}"
 
-      - name: Install dependencies
+      - name: "[Stage] Install"
         if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: R CMD Check
+      - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
 
-      - name: After Success
+      - name: "[Stage] After Success"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: Rscript -e "tic::after_success()"
 
