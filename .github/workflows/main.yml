@@ -65,7 +65,7 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
-      - name: [Linux] ccache
+      - name: "[Linux] ccache"
         if: runner.os == 'Linux'
         run: |
           sudo apt install ccache
