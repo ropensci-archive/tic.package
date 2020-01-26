@@ -29,7 +29,6 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      today: echo "$(date '+%d-%m')"
 
     steps:
       - uses: actions/checkout@v1
@@ -40,6 +39,10 @@ jobs:
           Ncpus: 8
 
       - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Prepare cache
+        if: runner.os != 'Windows'
+        run: export today=echo "$(date '+%d-%m')"
 
       - name: Cache R packages
         if: runner.os != 'Windows'
