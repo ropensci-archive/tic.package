@@ -42,7 +42,7 @@ jobs:
 
       - name: Prepare cache
         id: cache_timestamp
-        run: today = date '+%d-%m'
+        run: date '+%d-%m'
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -50,7 +50,7 @@ jobs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ steps.cache_timestamp.outputs.today }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ steps.cache_timestamp.outputs }}
 
       - name: ccache-linux
         if: runner.os == 'Linux'
