@@ -40,17 +40,15 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Prepare cache
-        id: cache_timestamp
-        run: date '+%d-%m'
-
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v1.1.0
+        env:
+          today: "$(date '+%d-%m')"
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ steps.cache_timestamp.outputs }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ env.today }}
 
       - name: ccache-linux
         if: runner.os == 'Linux'
