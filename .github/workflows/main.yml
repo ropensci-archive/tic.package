@@ -69,7 +69,7 @@ jobs:
       - name: "[Cache] Cache ccache"
         uses: actions/cache@v1.1.0
         with:
-          path: $CCACHE_DIR
+          path: ${{ env.CCACHE_DIR }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache
 
