@@ -70,7 +70,7 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ./ccache
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache
 
       - name: "[Linux] ccache"
