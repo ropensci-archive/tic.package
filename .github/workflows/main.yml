@@ -33,7 +33,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       today: $(echo "date '+%d-%m'")
-      CCACHE_DIR: $HOME/.ccache
+      CCACHE_DIR: $(echo $HOME/.ccache)
       pkgType: source
 
     steps:
