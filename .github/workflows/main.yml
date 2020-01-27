@@ -33,6 +33,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       today: $(echo "date '+%d-%m'")
+      CCACHE_DIR: ./.ccache
       pkgType: source
 
     steps:
@@ -54,16 +55,23 @@ jobs:
 
       # set current date for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      - name: [Cache] Prepare Cache
-        id: date
-        run: echo "::set-output name=date::$(date '+%d-%m')"
+      # - name: "[Cache] Prepare Cache"
+      #   id: date
+      #   run: echo "::set-output name=date::$(date '+%d-%m')"
+      #
+      # - name: "[Cache] Cache R packages"
+      #   uses: actions/cache@v1.1.0
+      #   with:
+      #     path: ${{ env.R_LIBS_USER }}
+      #     key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      #     restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
-      - name: [Cache] Cache R packages
+      - name: "[Cache] Cache ccache"
         uses: actions/cache@v1.1.0
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ./ccache
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
