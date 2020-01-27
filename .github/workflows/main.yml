@@ -54,11 +54,11 @@ jobs:
 
       # set current date for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      - name: Prepare R package cache
+      - name: [Cache] Prepare Cache
         id: date
         run: echo "::set-output name=date::$(date '+%d-%m')"
 
-      - name: Cache R packages
+      - name: [Cache] Cache R packages
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -96,7 +96,7 @@ jobs:
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: Rscript -e "tic::after_success()"
 
-      - name: Upload check results
+      - name: "[Stage] Upload R CMD check artifacts"
         if: failure()
         uses: actions/upload-artifact@master
         with:
