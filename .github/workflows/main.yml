@@ -42,7 +42,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-          Ncpus: 8
+          Ncpus: 15
 
       # LaTeX. Installation time:
       # Linux: ~ 1 min
