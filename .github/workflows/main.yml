@@ -27,7 +27,7 @@ jobs:
         # - { os: ubuntu-18.04, r: '3.3', cran: "https://cloud.r-project.org/"}
         # - { os: ubuntu-18.04, r: '3.4', cran: "https://cloud.r-project.org/"}
         # - { os: ubuntu-18.04, r: '3.5', cran: "https://cloud.r-project.org/"}
-        - { os: ubuntu-18.04, r: '3.6'}
+        - { os: ubuntu-18.04, r: 'release'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -73,7 +73,6 @@ jobs:
           mkdir -p ~/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
 
       - name: "[macOS] ccache"
-        if: runner.os == 'macOS' && matrix.config.r != 'devel'
         run: |
           brew install ccache
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
@@ -81,13 +80,11 @@ jobs:
 
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
-        if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
           Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) {install.packages('curl')}"
 
       - name: "[Stage] Install"
-        if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
