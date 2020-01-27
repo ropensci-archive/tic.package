@@ -83,7 +83,6 @@ jobs:
       - name: "[Stage] Prepare"
         if: matrix.config.r != 'devel' || ( runner.os == 'Linux' && matrix.config.r != 'devel' )
         run: |
-          echo -e "options(devtools.install.args = '--no-multiarch')" > $HOME/.Rprofile
           Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) {install.packages('curl')}"
 
