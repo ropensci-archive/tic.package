@@ -32,7 +32,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      CCACHE_DIR: temp/.ccache
+      CCACHE_DIR: ${{GITHUB.WORKSPACE}}/.ccache
       pkgType: source
 
     steps:
@@ -74,9 +74,9 @@ jobs:
       - name: "[Cache] Cache ccache"
         uses: actions/cache@v1.1.0
         with:
-          path: temp/.ccache
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test4
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test4
+          path: ${{ env.CCACHE_DIR}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
