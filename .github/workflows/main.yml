@@ -33,7 +33,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       today: $(echo "date '+%d-%m'")
-      CCACHE_DIR: $(echo $HOME/.ccache)
+      CCACHE_DIR: $(echo "$HOME/.ccache")
       pkgType: source
 
     steps:
@@ -70,8 +70,8 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.CCACHE_DIR }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test1
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test1
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test2
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test2
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
