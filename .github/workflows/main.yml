@@ -74,7 +74,7 @@ jobs:
       - name: "[Cache] Cache ccache"
         uses: actions/cache@v1.1.0
         with:
-          path: ${{steps.ccache-test2.outputs.ccache-test2}}
+          path: /home/runner/.ccache
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test3
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test3
 
