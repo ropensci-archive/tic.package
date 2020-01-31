@@ -54,12 +54,12 @@ jobs:
 
       # set current date for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      - name: "[Cache] Prepare Cache"
+      - name: "[Cache] Prepare daily timestamp for cache"
         id: date
         run: echo "::set-output name=date::$(date '+%d-%m')"
 
-      - name: "[Cache] Prepare Cache"
-        id: date-week
+      - name: "[Cache] Prepare weekly timestamp for cache"
+        id: datew
         run: echo "::set-output name=date::$(date '+%d-%m-%w')"
       #
       # - name: "[Cache] Cache R packages"
@@ -76,8 +76,8 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.CCACHE_DIR}}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.date.outputs.date-week}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.date.outputs.date-week}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.date}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.date}}
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
