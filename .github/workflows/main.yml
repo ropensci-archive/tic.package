@@ -54,9 +54,13 @@ jobs:
 
       # set current date for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      # - name: "[Cache] Prepare Cache"
-      #   id: date
-      #   run: echo "::set-output name=date::$(date '+%d-%m')"
+      - name: "[Cache] Prepare Cache"
+        id: date
+        run: echo "::set-output name=date::$(date '+%d-%m')"
+
+      - name: "[Cache] Prepare Cache"
+        id: date-week
+        run: echo "::set-output name=date::$(date '+%d-%m-%w')"
       #
       # - name: "[Cache] Cache R packages"
       #   uses: actions/cache@v1.1.0
@@ -72,8 +76,8 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.CCACHE_DIR}}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.date.outputs.date-week}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.date.outputs.date-week}}
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
@@ -88,11 +92,6 @@ jobs:
           brew install ccache
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
           mkdir -p ~/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
-
-      - name: "[Windows] ccache"
-        if: runner.os == 'Windows'
-        run: |
-          choco install ccache
 
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
