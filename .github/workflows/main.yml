@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:
       - master
+  # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 3 * * *"
@@ -54,12 +55,14 @@ jobs:
       # set current date for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
       - name: "[Cache] Prepare daily timestamp for cache"
+        if: runner.os != 'Windows'
         id: date
         run: echo "::set-output name=date::$(date '+%d-%m')"
 
       - name: "[Cache] Prepare weekly timestamp for cache"
+        if: runner.os != 'Windows'
         id: datew
-        run: echo "::set-output name=date::$(date '+%d-%m-%w')"
+        run: echo "::set-output name=datew::$(date '+%Y-%V')"
       #
       # - name: "[Cache] Cache R packages"
       #   uses: actions/cache@v1.1.0
@@ -75,8 +78,8 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.CCACHE_DIR}}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.date}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.datew}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.datew}}
 
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
@@ -87,9 +90,8 @@ jobs:
 
       - name: "[macOS] ccache"
         if: runner.os == 'macOS'
-        env:
-          pkgType: source
         run: |
+          export pkgType="source"
           brew install ccache
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
           mkdir -p ~/.ccache && echo -e 'max_size = 5.0G\nsloppiness = include_file_ctime\nhash_dir=false' > $HOME/.ccache/ccache.conf
