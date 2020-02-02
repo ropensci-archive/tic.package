@@ -33,7 +33,6 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       CCACHE_DIR: ${{GITHUB.WORKSPACE}}/.ccache
-      pkgType: source
 
     steps:
       - uses: actions/checkout@v1
@@ -88,6 +87,8 @@ jobs:
 
       - name: "[macOS] ccache"
         if: runner.os == 'macOS'
+        env:
+          pkgType: source
         run: |
           brew install ccache
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
