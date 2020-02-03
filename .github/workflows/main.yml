@@ -25,9 +25,6 @@ jobs:
         - { os: windows-latest, r: '3.6'}
         - { os: macOS-latest, r: '3.6'}
         - { os: macOS-latest, r: 'devel'}
-        # - { os: ubuntu-18.04, r: '3.3', cran: "https://cloud.r-project.org/"}
-        # - { os: ubuntu-18.04, r: '3.4', cran: "https://cloud.r-project.org/"}
-        # - { os: ubuntu-18.04, r: '3.5', cran: "https://cloud.r-project.org/"}
         - { os: ubuntu-18.04, r: 'release'}
 
     env:
