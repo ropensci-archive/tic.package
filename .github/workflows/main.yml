@@ -34,6 +34,8 @@ jobs:
       # we cannot write to ~/.ccache unfortunately
       CCACHE_BASEDIR: ${{ GITHUB.WORKSPACE }}
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
+      CCACHE_HASHDIR: false
+      CCACHE_SLOPPINESS: include_file_ctime
 
     steps:
       - uses: actions/checkout@v1
@@ -77,8 +79,8 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: ${{ env.CCACHE_DIR}}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.datew}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test5-${{steps.datew.outputs.datew}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test6-${{steps.datew.outputs.datew}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test6-${{steps.datew.outputs.datew}}
 
       # install ccache and write config file
       - name: "[Linux] ccache"
