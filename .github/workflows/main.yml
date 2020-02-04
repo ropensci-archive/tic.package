@@ -34,7 +34,7 @@ jobs:
       # we cannot write to ~/.ccache unfortunately
       CCACHE_BASEDIR: ${{ GITHUB.WORKSPACE }}
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
-      CCACHE_HASHDIR: false
+      CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
 
     steps:
