@@ -25,7 +25,7 @@ jobs:
         - { os: windows-latest, r: 'release'}
         - { os: macOS-latest, r: 'release'}
         - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-18.04, r: 'release'}
+        - { os: ubuntu-18.04, r: 'release', env: BUILD_PKGDOWN: true}
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
@@ -139,7 +139,9 @@ jobs:
           environment: production
 
       - name: "[Stage] Before Deploy"
-        run: Rscript -e "tic::before_deploy()"
+        run: |
+          Rscript -e "tic::ci_can_push()"
+          Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
         run: Rscript -e "tic::deploy()"
