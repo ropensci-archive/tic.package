@@ -31,7 +31,8 @@ jobs:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      # we cannot write to ~/.ccache unfortunately
+      # we are not allowed to write to ~/.ccache on GH Actions
+      # setting some ccache options
       CCACHE_BASEDIR: ${{ GITHUB.WORKSPACE }}
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
       CCACHE_NOHASHDIR: true
@@ -56,8 +57,8 @@ jobs:
 
       # set date/week for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      # cache R packages daily
-      # cache ccache weekly -> 'ccach' helps rebuilding the package cache faster
+      # - cache R packages daily
+      # - cache ccache weekly -> 'ccache' helps rebuilding the package cache faster
       - name: "[Cache] Prepare daily timestamp for cache"
         if: runner.os != 'Windows'
         id: date
@@ -88,16 +89,13 @@ jobs:
         run: |
           sudo apt install ccache libcurl4-openssl-dev
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
-          ccache -s
 
       # install ccache and write config file
       - name: "[macOS] ccache"
         if: runner.os == 'macOS'
         run: |
-          export pkgType="source"
           brew install ccache
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
-          ccache -s
 
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
@@ -109,7 +107,6 @@ jobs:
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: |
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
-          ccache -s
 
       # macOS devel needs its own stage because we need to work with an env var to suppress the usage of binaries
       # the envvar is picked up and set via `options(pkgType)`
@@ -119,7 +116,6 @@ jobs:
           pkgType: source
         run: |
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
-          ccache -s
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
@@ -142,11 +138,14 @@ jobs:
           token: "${{ github.token }}"
           environment: production
 
-      - name: Deploy
-        run: |
-          Rscript -e "tic::before_deploy()"
-          Rscript -e "tic::deploy()"
-          Rscript -e "tic::after_deploy()"
+      - name: "[Stage] Before Deploy"
+        run: Rscript -e "tic::before_deploy()"
+
+      - name: "[Stage] Deploy"
+        run: Rscript -e "tic::deploy()"
+
+      - name: "[Stage] After Deploy"
+        run: Rscript -e "tic::after_deploy()"
 
       - name: Update deployment status (success)
         if: success()
