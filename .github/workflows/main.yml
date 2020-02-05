@@ -22,10 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: 'release'}
-        - { os: macOS-latest, r: 'release'}
-        - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-18.04, r: 'devel'}
+          - { os: windows-latest, r: "release" }
+          - { os: macOS-latest, r: "release" }
+          - { os: macOS-latest, r: "devel" }
+          - { os: ubuntu-18.04, r: "release" }
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
