@@ -155,7 +155,7 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@releases/v1
         with:
-          token: "${{ TIC_DEPLOY_KEY }}"
+          token: "${{ github.token }}"
           target-url: http://my-app-url.com
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
