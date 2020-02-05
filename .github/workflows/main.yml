@@ -25,11 +25,7 @@ jobs:
         - { os: windows-latest, r: 'release'}
         - { os: macOS-latest, r: 'release'}
         - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-18.04,
-                r: 'release',
-                env:
-                  BUILD_PKGDOWN: true
-          }
+        - { os: ubuntu-18.04, r: 'devel'}
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
@@ -143,11 +139,13 @@ jobs:
           environment: production
 
       - name: "[Stage] Before Deploy"
+        if: runner.os == 'Linux'
         run: |
           Rscript -e "tic::ci_can_push()"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
+        if: runner.os == 'Linux'
         run: Rscript -e "tic::deploy()"
 
       - name: "[Stage] After Deploy"
@@ -157,7 +155,7 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@releases/v1
         with:
-          token: "${{ github.token }}"
+          token: "${{ TIC_DEPLOY_KEY }}"
           target-url: http://my-app-url.com
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
