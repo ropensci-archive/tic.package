@@ -69,12 +69,12 @@ jobs:
         id: datew
         run: echo "::set-output name=datew::$(date '+%Y-%V')"
 
-      # - name: "[Cache] Cache R packages"
-      #   uses: actions/cache@v1.1.0
-      #   with:
-      #     path: ${{ env.R_LIBS_USER }}
-      #     key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-      #     restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      - name: "[Cache] Cache R packages"
+        uses: actions/cache@v1.1.0
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
       - name: "[Cache] Cache ccache"
         uses: actions/cache@v1.1.0
@@ -142,6 +142,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           Rscript -e "tic::ci_can_push()"
+          Rscript -e "tic::ci_on_ghactions()"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
