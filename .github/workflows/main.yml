@@ -46,8 +46,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
           Ncpus: 4
 
-      - uses: mxschmitt/action-tmate@v1.0.2
-
       # LaTeX. Installation time:
       # Linux: ~ 1 min
       # macOS: ~ 1 min 30s
@@ -152,6 +150,8 @@ jobs:
 
       - name: "[Stage] After Deploy"
         run: Rscript -e "tic::after_deploy()"
+
+      - uses: mxschmitt/action-tmate@v1.0.2
 
       - name: Update deployment status (success)
         if: success()
