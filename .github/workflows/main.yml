@@ -5,8 +5,12 @@ on:
   pull_request:
     branches:
       - master
+  # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 3 * * *"
 
-name: Check R Package
+name: GH Actions via {tic}
 
 jobs:
   R-CMD-check:
@@ -18,18 +22,21 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6'}
-        - { os: macOS-latest, r: '3.6'}
-        - { os: macOS-latest, r: 'devel', cran: "https://cloud.r-project.org/"}
-        - { os: ubuntu-16.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - { os: windows-latest, r: "release" }
+          - { os: macOS-latest, r: "release" }
+          - { os: macOS-latest, r: "devel" }
+          - { os: ubuntu-18.04, r: "release" }
 
     env:
+      # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      # we are not allowed to write to ~/.ccache on GH Actions
+      # setting some ccache options
+      CCACHE_BASEDIR: ${{ GITHUB.WORKSPACE }}
+      CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
+      CCACHE_NOHASHDIR: true
+      CCACHE_SLOPPINESS: include_file_ctime
 
     steps:
       - uses: actions/checkout@v1
@@ -37,56 +44,128 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
+          Ncpus: 4
+
+      # LaTeX. Installation time:
+      # Linux: ~ 1 min
+      # macOS: ~ 1 min 30s
+      # Windows: never finishes
+      - uses: r-lib/actions/setup-tinytex@v1
+        if: runner.os != 'Windows'
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Cache R packages
+      # set date/week for use in cache creation
+      # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
+      # - cache R packages daily
+      # - cache ccache weekly -> 'ccache' helps rebuilding the package cache faster
+      - name: "[Cache] Prepare daily timestamp for cache"
         if: runner.os != 'Windows'
-        uses: actions/cache@v1
+        id: date
+        run: echo "::set-output name=date::$(date '+%d-%m')"
+
+      - name: "[Cache] Prepare weekly timestamp for cache"
+        if: runner.os != 'Windows'
+        id: datew
+        run: echo "::set-output name=datew::$(date '+%Y-%V')"
+
+      - name: "[Cache] Cache R packages"
+        uses: actions/cache@v1.1.0
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
-      # only on macOS devel, using binaries on release
-      - name: ccache-mac
-        if: runner.os == 'macOS' && matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+      - name: "[Cache] Cache ccache"
+        uses: actions/cache@v1.1.0
+        with:
+          path: ${{ env.CCACHE_DIR}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test6-${{steps.datew.outputs.datew}}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-test6-${{steps.datew.outputs.datew}}
+
+      # install ccache and write config file
+      - name: "[Linux] ccache"
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt install ccache libcurl4-openssl-dev
+          mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+
+      # install ccache and write config file
+      - name: "[macOS] ccache"
+        if: runner.os == 'macOS'
         run: |
           brew install ccache
-          export PATH="/usr/local/opt/ccache/libexec:$PATH"
+          mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache clang -std=gnu99\nCXX=ccache clang++\nCXX11=ccache clang++ -std=gnu99\nCXX14=ccache clang++ -std=gnu99\nC11=ccache clang++\nC14=ccache clang++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
-      - name: Query dependencies
+      # for some strange Windows reason this step and the next one need to be decoupled
+      - name: "[Stage] Prepare"
         run: |
-          Rscript -e "install.packages('remotes')"
-          Rscript -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
+          Rscript -e "if (!requireNamespace('remotes')) {install.packages('remotes')}"
+          Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) {install.packages('curl')}"
 
-      - name: Meta non Windows
-        if: runner.os != 'Windows'
+      - name: "[Stage] Install"
+        if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: |
-          echo -e 'options(Ncpus = 8, repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
+          Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: Install dependencies
+      # macOS devel needs its own stage because we need to work with an env var to suppress the usage of binaries
+      # the envvar is picked up and set via `options(pkgType)`
+      - name: "[Stage] Install (macOS-devel)"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+        env:
+          pkgType: source
         run: |
-          Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
-          Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()"
-          Rscript -e "tic::before_install()"
-          Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))"
+          Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: Check
+      - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
 
-      - name: after_success
+      - name: "[Stage] After Success"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: Rscript -e "tic::after_success()"
 
-      - name: Upload check results
+      - name: "[Stage] Upload R CMD check artifacts"
         if: failure()
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      # - name: Test coverage
-      #   if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
-      #   run: |
-      #     Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+      - uses: chrnorm/deployment-action@v1.1.1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          environment: production
+
+      - name: "[Stage] Before Deploy"
+        if: runner.os == 'Linux'
+        run: |
+          Rscript -e "tic::ci_can_push()"
+          Rscript -e "tic::ci_on_ghactions()"
+          Rscript -e "tic::before_deploy()"
+
+      - name: "[Stage] Deploy"
+        if: runner.os == 'Linux'
+        run: Rscript -e "tic::deploy()"
+
+      - name: "[Stage] After Deploy"
+        run: Rscript -e "tic::after_deploy()"
+
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target-url: http://my-app-url.com
+          state: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target-url: http://my-app-url.com
+          state: "failure"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
