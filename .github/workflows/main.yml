@@ -151,8 +151,6 @@ jobs:
       - name: "[Stage] After Deploy"
         run: Rscript -e "tic::after_deploy()"
 
-      - uses: mxschmitt/action-tmate@v1.0.2
-
       - name: Update deployment status (success)
         if: success()
         uses: chrnorm/deployment-status@releases/v1
