@@ -10,7 +10,7 @@ on:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 3 * * *"
 
-name: GH Actions via {tic}
+name: R CMD Check via {tic}
 
 jobs:
   R-CMD-check:
@@ -143,6 +143,7 @@ jobs:
         run: |
           Rscript -e "tic::ci_can_push()"
           Rscript -e "tic::ci_on_ghactions()"
+          Rscript -e "tic::ci_get_branch()"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
