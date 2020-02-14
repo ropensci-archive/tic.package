@@ -37,6 +37,7 @@ jobs:
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
       CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
+      id_rsa: ${{ secrets.id_rsa }}
 
     steps:
       - uses: actions/checkout@v1
