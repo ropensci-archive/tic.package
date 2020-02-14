@@ -37,7 +37,7 @@ jobs:
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
       CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
-      #id_rsa: ${{ secrets.id_rsa }}
+      id_rsa: ${{ secrets.id_rsa }}
 
     steps:
       - uses: actions/checkout@v1
@@ -142,8 +142,7 @@ jobs:
       - name: "[Stage] Before Deploy"
         if: runner.os == 'Linux'
         run: |
-          Rscript -e "tic::ci_can_push()"
-          Rscript -e "tic::ci_on_ghactions()"
+          Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
         if: runner.os == 'Linux'
