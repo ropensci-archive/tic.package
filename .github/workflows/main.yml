@@ -144,6 +144,7 @@ jobs:
         run: |
           Rscript -e "tic::ci_can_push()"
           Rscript -e "tic::ci_has_env('TIC_DEPLOY_KEY')"
+          Rscript -e "print('test')"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
