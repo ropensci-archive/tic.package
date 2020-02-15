@@ -142,6 +142,8 @@ jobs:
       - name: "[Stage] Before Deploy"
         if: runner.os == 'Linux'
         run: |
+          Rscript -e "tic::ci_can_push()"
+          Rscript -e "tic::ci_has_env('TIC_DEPLOY_KEY')"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
