@@ -4,7 +4,7 @@
 [![Travis build status](https://img.shields.io/travis/ropenscilabs/tic.package/master?logo=travis&style=flat-square&label=Linux)](https://travis-ci.com/ropenscilabs/tic.package)
 [![CircleCI build status](https://img.shields.io/circleci/build/gh/ropenscilabs/tic.package/master?label=Linux&logo=circle&logoColor=green&style=flat-square)](https://circleci.com/gh/ropenscilabs/tic.package)
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/ropenscilabs/tic-package?label=Windows&logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/ropenscilabs/tic-package)
-[![R build status](https://github.com/ropenscilabs/tic.package/workflows/R-CMD-check/badge.svg)](https://github.com/ropenscilabs/tic.package)
+![R CMD Check via {tic}](https://github.com/ropenscilabs/tic.package/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg)
 <!-- badges: end -->
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
