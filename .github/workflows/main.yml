@@ -38,7 +38,6 @@ jobs:
       CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
       TIC_DEPLOY_KEY: ${{ secrets.TIC_DEPLOY_KEY }}
-      TEST: ${{ secrets.TEST }}
 
     steps:
       - uses: actions/checkout@v1
@@ -89,7 +88,6 @@ jobs:
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
         run: |
-          Rscript -e "Sys.getenv('TEST')"
           sudo apt install ccache libcurl4-openssl-dev
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache gcc -std=gnu99\nCXX=ccache g++\nCXX11=ccache g++ -std=gnu99\nCXX14=ccache g++ -std=gnu99\nC11=ccache g++\nC14=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
@@ -144,8 +142,6 @@ jobs:
       - name: "[Stage] Before Deploy"
         if: runner.os == 'Linux'
         run: |
-          Rscript -e "tic::ci_can_push()"
-          Rscript -e "tic::ci_has_env('TIC_DEPLOY_KEY')"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
