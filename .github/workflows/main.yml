@@ -1,10 +1,6 @@
 on:
   push:
-    branches:
-      - gh_actions
   pull_request:
-    branches:
-      - master
   # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
   schedule:
     # * is a special character in YAML so you have to quote this string
@@ -22,10 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          # comment out lines if you do not want to build on certain platforms
           - { os: windows-latest, r: "release" }
           - { os: macOS-latest, r: "release" }
           - { os: macOS-latest, r: "devel" }
           - { os: ubuntu-18.04, r: "release" }
+          - { os: ubuntu-18.04, r: "oldrelease" }
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
@@ -37,6 +35,10 @@ jobs:
       CCACHE_DIR: ${{ GITHUB.WORKSPACE }}/.ccache
       CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
+      # make sure to run `tic::use_ghactions_deploy()` to set up deployment
+      TIC_DEPLOY_KEY: ${{ secrets.TIC_DEPLOY_KEY }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
 
     steps:
       - uses: actions/checkout@v1
@@ -130,7 +132,6 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
       - uses: chrnorm/deployment-action@v1.1.1
         name: Create GitHub deployment
         id: deployment
@@ -139,15 +140,10 @@ jobs:
           environment: production
 
       - name: "[Stage] Before Deploy"
-        if: runner.os == 'Linux'
         run: |
-          Rscript -e "tic::ci_can_push()"
-          Rscript -e "tic::ci_on_ghactions()"
-          Rscript -e "tic::ci_get_branch()"
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
-        if: runner.os == 'Linux'
         run: Rscript -e "tic::deploy()"
 
       - name: "[Stage] After Deploy"
