@@ -8,3 +8,5 @@
 ^\.circleci$
 ^\.github$
 ^depends\.Rds$
+^\.ccache$
+^clang-*$
