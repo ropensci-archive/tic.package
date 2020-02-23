@@ -9,4 +9,4 @@
 ^\.github$
 ^depends\.Rds$
 ^\.ccache$
-^clang-*$
+^clang-.*$
