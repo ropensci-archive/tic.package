@@ -118,7 +118,6 @@ jobs:
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
-          Rscript -e "tic::ci_is_interactive()"
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
@@ -132,6 +131,7 @@ jobs:
         run: |
           echo -e 'options(pkgType = "source", repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic@gh-actions')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
+          Rscript -e "tic::ci_is_interactive()"
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
