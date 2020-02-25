@@ -118,6 +118,7 @@ jobs:
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
+          Rscript -e "tic::ci_is_interactive()"
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
@@ -136,7 +137,7 @@ jobs:
         run: Rscript -e 'tic::script()'
 
       - name: "[Stage] After Success"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "tic::after_success()"
 
       - name: "[Stage] Upload R CMD check artifacts"
