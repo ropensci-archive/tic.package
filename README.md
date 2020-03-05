@@ -1,7 +1,7 @@
 # tic.package
 
 <!-- badges: start -->
-[![R CMD Check via {tic}](https://img.shields.io/github/workflow/status/ropenscilabs/tic.package/R%20CMD%20Check%20via%20%7Btic%7D?logo=github&label=R CMD Check via {tic}&style=flat-square)](https://github.com/ropenscilabs/tic.package/actions)
+[![R CMD Check via {tic}](https://img.shields.io/github/workflow/status/ropenscilabs/tic.package/R%20CMD%20Check%20via%20%7Btic%7D?logo=github&label=R%20CMD%20Check%20via%20{tic}&style=flat-square)](https://github.com/ropenscilabs/tic.package/actions)
 [![Travis build status](https://img.shields.io/travis/ropenscilabs/tic.package/master?logo=travis&style=flat-square&label=Linux)](https://travis-ci.com/ropenscilabs/tic.package)
 [![CircleCI build status](https://img.shields.io/circleci/build/gh/ropenscilabs/tic.package/master?label=Linux&logo=circle&logoColor=green&style=flat-square)](https://circleci.com/gh/ropenscilabs/tic.package)
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/ropenscilabs/tic-package?label=Windows&logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/ropenscilabs/tic-package)
