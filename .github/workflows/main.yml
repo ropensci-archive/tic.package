@@ -22,7 +22,7 @@ jobs:
           - { os: windows-latest, r: "release" }
           - { os: macOS-latest, r: "release" }
           - { os: macOS-latest, r: "devel" }
-          - { os: ubuntu-18.04, r: "release" }
+          - { os: ubuntu-latest, r: "release" }
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
@@ -36,6 +36,8 @@ jobs:
       CCACHE_SLOPPINESS: include_file_ctime
       # make sure to run `tic::use_ghactions_deploy()` to set up deployment
       TIC_DEPLOY_KEY: ${{ secrets.TIC_DEPLOY_KEY }}
+      # codecov API KEY to upload covr results. Query repo-specific token via https://codecov.io/gh/<owner>/<repo>/settings
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
 
@@ -72,7 +74,7 @@ jobs:
 
       - name: "[Cache] Cache R packages"
         if: runner.os != 'Windows'
-        uses: actions/cache@v1.1.2
+        uses: pat-s/always-upload-cache@v1.1.4
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
@@ -80,7 +82,7 @@ jobs:
 
       - name: "[Cache] Cache ccache"
         if: runner.os != 'Windows'
-        uses: actions/cache@v1.1.2
+        uses: pat-s/always-upload-cache@v1.1.4
         with:
           path: ${{ env.CCACHE_DIR}}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
@@ -131,7 +133,6 @@ jobs:
         run: |
           echo -e 'options(pkgType = "source", repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
-          Rscript -e "tic::ci_is_interactive()"
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
@@ -158,3 +159,4 @@ jobs:
       - name: "[Stage] After Deploy"
         if: runner.os != 'Windows'
         run: Rscript -e "tic::after_deploy()"
+
