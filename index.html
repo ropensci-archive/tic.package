@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Example Package for tic • tic.package</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Example Package for tic">
 <meta property="og:description" content="Building a package with pkgdown documentation.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tic.package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0-0</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ropenscilabs/tic.package">
+  <a href="https://github.com/ropenscilabs/tic.package/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -88,16 +88,16 @@
 <ol>
 <li>
 <p>Use <code>usethis::create_package("&lt;path-to-package-dir&gt;")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>usethis<span class="op">::</span><span class="kw">create_package</span>(<span class="st">"~/git/tic.package"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>✔ Creating <span class="st">'R/'</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>✔ Creating <span class="st">'man/'</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>✔ Writing <span class="st">'DESCRIPTION'</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>✔ Writing <span class="st">'NAMESPACE'</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>✔ Writing <span class="st">'tic.package.Rproj'</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>✔ Adding <span class="st">'.Rproj.user'</span> to <span class="st">'.gitignore'</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>✔ Adding <span class="st">'^tic.package</span><span class="ch">\\</span><span class="st">.Rproj$'</span>, <span class="st">'^</span><span class="ch">\\</span><span class="st">.Rproj</span><span class="ch">\\</span><span class="st">.user$'</span> to <span class="st">'.Rbuildignore'</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>✔ Opening new project <span class="st">'tic.package'</span> <span class="cf">in</span> RStudio</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r">usethis::create_package("~/git/tic.package")
+✔ Changing active project to '/home/<username>/git/tic.package'
+✔ Creating 'R/'
+✔ Creating 'man/'
+✔ Writing 'DESCRIPTION'
+✔ Writing 'NAMESPACE'
+✔ Writing 'tic.package.Rproj'
+✔ Adding '.Rproj.user' to '.gitignore'
+✔ Adding '^tic.package\\.Rproj$', '^\\.Rproj\\.user$' to '.Rbuildignore'
+✔ Opening new project 'tic.package' in RStudio</username></pre></div>
 </li>
 <li>
 <p>Initialize Git via <code>usethis::use_git()</code>:</p>
@@ -121,35 +121,35 @@ Selection: 1</code></pre>
 </li>
 <li>
 <p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>✔ Setting Roxygen field <span class="cf">in</span> DESCRIPTION to <span class="st">'list(markdown = TRUE)'</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>✔ Setting RoxygenNote field <span class="cf">in</span> DESCRIPTION to <span class="st">'6.0.1.9000'</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>● Run <span class="st">`</span><span class="dt">devtools::document()</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r">✔ Changing active project to '/home/<username>/git/tic.package'
+✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
+✔ Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'
+● Run `devtools::document()`</username></pre></div>
 </li>
 <li>
 <p>Add a license: <code>usethis::add_gpl3_license()</code> (or any license of your choice):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>✔ Setting License field <span class="cf">in</span> DESCRIPTION to <span class="st">'GPL-3'</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>✔ Writing <span class="st">'LICENSE.md'</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>✔ Adding <span class="st">'^LICENSE</span><span class="ch">\\</span><span class="st">.md$'</span> to <span class="st">'.Rbuildignore'</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r">✔ Changing active project to '/home/<username>/git/tic.package'
+✔ Setting License field in DESCRIPTION to 'GPL-3'
+✔ Writing 'LICENSE.md'
+✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'</username></pre></div>
 </li>
 <li>
 <p>Create a Github repo by using <code>usethis::use_github()</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>● Check title and description</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  Name<span class="op">:</span><span class="st">        </span>tic.package</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  Description<span class="op">:</span><span class="st"> </span>What the Package <span class="kw">Does</span> (One Line, Title Case)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>Are title and description ok?</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>No way</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>I agree</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Nope</span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a>Selection<span class="op">:</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>✔ Creating GitHub repository</span>
-<span id="cb5-11"><a href="#cb5-11"></a>✔ Adding GitHub remote</span>
-<span id="cb5-12"><a href="#cb5-12"></a>✔ Adding GitHub links to DESCRIPTION</span>
-<span id="cb5-13"><a href="#cb5-13"></a>✔ Setting URL field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package'</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>✔ Setting BugReports field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package/issues'</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a>✔ Pushing to GitHub and setting remote tracking branch</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="r">● Check title and description
+  Name:        tic.package
+  Description: What the Package Does (One Line, Title Case)
+Are title and description ok?
+1: No way
+2: I agree
+3: Nope
+
+Selection: 2
+✔ Creating GitHub repository
+✔ Adding GitHub remote
+✔ Adding GitHub links to DESCRIPTION
+✔ Setting URL field in DESCRIPTION to 'https://github.com/<user>/tic.package'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/<user>/tic.package/issues'
+✔ Pushing to GitHub and setting remote tracking branch</user></user></pre></div>
 </li>
 <li><p>Set up Continuous Integration by using <code><a href="https://docs.ropensci.org/tic/reference/use_tic.html">tic::use_tic()</a></code>. Take a look at the <a href="https://ropenscilabs.github.io/tic/articles/tic.html">Getting Started</a> vignette of the <a href="https://github.com/ropenscilabs/tic">tic</a> package for a detailed walkthrough.</p></li>
 </ol>
@@ -157,11 +157,11 @@ Selection: 1</code></pre>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/ropenscilabs/tic.package">https://​github.com/​ropenscilabs/​tic.package</a>
+<li>Browse source code at <br><a href="https://github.com/ropenscilabs/tic.package/">https://​github.com/​ropenscilabs/​tic.package/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/ropenscilabs/tic.package/issues">https://​github.com/​ropenscilabs/​tic.package/​issues</a>
 </li>
@@ -198,7 +198,7 @@ Selection: 1</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
