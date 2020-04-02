@@ -77,42 +77,42 @@
 <a href="#set-up-an-operational-fork-of-this-repository" class="anchor"></a>Set up an operational fork of this repository</h2>
 <p>If you want to experiment with <em>travis</em> and <em>tic</em> for a R package, you can fork it.</p>
 <ol>
-<li>Use <code>usethis::create_from_github()</code> to automatically create a fork of this repo. If you use RStudio, a new RStudio project will open. You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if you’re having problems. (It’s definitely worth getting this function running as it saves you a lot of time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github).</li>
+<li>Use <code>usethis::create_from_github()</code> to automatically create a fork of this repo. If you use RStudio, a new RStudio project will open. You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if youâre having problems. (Itâs definitely worth getting this function running as it saves you a lot of time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github).</li>
 <li>Run <code><a href="https://docs.ropensci.org/tic/reference/use_tic.html">tic::use_tic()</a></code> to set up all requirements needed for the CI integration of your package.</li>
 </ol>
 </div>
 <div id="create-a-package-from-scratch" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-package-from-scratch" class="anchor"></a>Create a package from scratch</h2>
-<p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using <em>roxygen2</em> with Markdown (item 3) or enabling CI for your package (item 6).</p>
+<p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g.Â using <em>roxygen2</em> with Markdown (item 3) or enabling CI for your package (item 6).</p>
 <ol>
 <li>
 <p>Use <code>usethis::create_package("&lt;path-to-package-dir&gt;")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
 <div class="sourceCode" id="cb1"><pre class="r">usethis::create_package("~/git/tic.package")
-✔ Changing active project to '/home/<username>/git/tic.package'
-✔ Creating 'R/'
-✔ Creating 'man/'
-✔ Writing 'DESCRIPTION'
-✔ Writing 'NAMESPACE'
-✔ Writing 'tic.package.Rproj'
-✔ Adding '.Rproj.user' to '.gitignore'
-✔ Adding '^tic.package\\.Rproj$', '^\\.Rproj\\.user$' to '.Rbuildignore'
-✔ Opening new project 'tic.package' in RStudio</username></pre></div>
+â Changing active project to '/home/<username>/git/tic.package'
+â Creating 'R/'
+â Creating 'man/'
+â Writing 'DESCRIPTION'
+â Writing 'NAMESPACE'
+â Writing 'tic.package.Rproj'
+â Adding '.Rproj.user' to '.gitignore'
+â Adding '^tic.package\\.Rproj$', '^\\.Rproj\\.user$' to '.Rbuildignore'
+â Opening new project 'tic.package' in RStudio</username></pre></div>
 </li>
 <li>
 <p>Initialize Git via <code>usethis::use_git()</code>:</p>
-<pre><code>✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
-✔ Initialising Git repo
-✔ Adding '.Rhistory', '.RData' to '.gitignore'
+<pre><code>â Changing active project to '/home/&lt;username&gt;/git/tic.package'
+â Initialising Git repo
+â Adding '.Rhistory', '.RData' to '.gitignore'
 OK to make an initial commit of 5 files?
 1: Yup
 2: No
 3: Absolutely not
 
 Selection: 1
-✔ Adding files and committing
-● A restart of RStudio is required to activate the Git pane
-● Restart now?
+â Adding files and committing
+â A restart of RStudio is required to activate the Git pane
+â Restart now?
 1: Absolutely
 2: No way
 3: Absolutely not
@@ -121,21 +121,21 @@ Selection: 1</code></pre>
 </li>
 <li>
 <p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r">✔ Changing active project to '/home/<username>/git/tic.package'
-✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
-✔ Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'
-● Run `devtools::document()`</username></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r">â Changing active project to '/home/<username>/git/tic.package'
+â Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
+â Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'
+â Run `devtools::document()`</username></pre></div>
 </li>
 <li>
 <p>Add a license: <code>usethis::add_gpl3_license()</code> (or any license of your choice):</p>
-<div class="sourceCode" id="cb4"><pre class="r">✔ Changing active project to '/home/<username>/git/tic.package'
-✔ Setting License field in DESCRIPTION to 'GPL-3'
-✔ Writing 'LICENSE.md'
-✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'</username></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r">â Changing active project to '/home/<username>/git/tic.package'
+â Setting License field in DESCRIPTION to 'GPL-3'
+â Writing 'LICENSE.md'
+â Adding '^LICENSE\\.md$' to '.Rbuildignore'</username></pre></div>
 </li>
 <li>
 <p>Create a Github repo by using <code>usethis::use_github()</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="r">● Check title and description
+<div class="sourceCode" id="cb5"><pre class="r">â Check title and description
   Name:        tic.package
   Description: What the Package Does (One Line, Title Case)
 Are title and description ok?
@@ -144,12 +144,12 @@ Are title and description ok?
 3: Nope
 
 Selection: 2
-✔ Creating GitHub repository
-✔ Adding GitHub remote
-✔ Adding GitHub links to DESCRIPTION
-✔ Setting URL field in DESCRIPTION to 'https://github.com/<user>/tic.package'
-✔ Setting BugReports field in DESCRIPTION to 'https://github.com/<user>/tic.package/issues'
-✔ Pushing to GitHub and setting remote tracking branch</user></user></pre></div>
+â Creating GitHub repository
+â Adding GitHub remote
+â Adding GitHub links to DESCRIPTION
+â Setting URL field in DESCRIPTION to 'https://github.com/<user>/tic.package'
+â Setting BugReports field in DESCRIPTION to 'https://github.com/<user>/tic.package/issues'
+â Pushing to GitHub and setting remote tracking branch</user></user></pre></div>
 </li>
 <li><p>Set up Continuous Integration by using <code><a href="https://docs.ropensci.org/tic/reference/use_tic.html">tic::use_tic()</a></code>. Take a look at the <a href="https://ropenscilabs.github.io/tic/articles/tic.html">Getting Started</a> vignette of the <a href="https://github.com/ropenscilabs/tic">tic</a> package for a detailed walkthrough.</p></li>
 </ol>
