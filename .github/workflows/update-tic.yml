@@ -30,6 +30,7 @@ jobs:
         run: |
             sudo apt install libcurl4-openssl-dev
             Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
+            Rscript -e "if (!requireNamespace('usethis')) install.packages('usethis', type = 'source')"
             Rscript -e "remotes::install_github('ropensci/tic@update-yaml')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
             Rscript -e "tic::update_yml()"
             git config --global user.email "example@example.com"
