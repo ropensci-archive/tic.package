@@ -65,6 +65,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT1 }}
+          branch: tic-update
 
       - name: Create Pull Request
         run: |
