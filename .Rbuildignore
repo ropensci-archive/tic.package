@@ -10,3 +10,4 @@
 ^depends\.Rds$
 ^\.ccache$
 ^clang-.*
+^gfortran.*
