@@ -55,7 +55,7 @@ jobs:
             git checkout -b "tic-update${{ env.nv }}"
             git commit .travis.yml -m 'Update .travis.yml' || echo "No changes to commit"
             git commit .circleci/config.yml -m 'Update .circleci/config.yml' || echo "No changes to commit"
-            git commit .github/main.yml -m 'Update .github/main.yml' || echo "No changes to commit"
+            git commit .github/workflows/main.yml -m 'Update .github/workflows/main.yml' || echo "No changes to commit"
             git push --set-upstream origin "tic-update${{ env.nv }}"
             head="${{ github.repository_owner }}:tic-update${{ env.nv }}"
             # https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions
