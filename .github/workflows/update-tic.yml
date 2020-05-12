@@ -1,0 +1,60 @@
+on:
+  push:
+  pull_request:
+  # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 4 * * *"
+
+name: R CMD Check via {tic}
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r }}
+          Ncpus: 4
+
+      - name: Updating
+        run: |
+            Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
+            Rscript -e "remotes::install_github('ropensci/tic@update-yaml')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
+            Rscript -e "tic::update_yml()"
+            git config --global user.email "example@example.com"
+            git config --global user.name "gh-pages committer"
+            git checkout -b "tic-update${{ env.nv }}"
+            git commit .travis.yml -m 'Update .travis.yml' || echo "No changes to commit"
+            git commit .circleci/config.yml -m 'Update .circleci/config.yml' || echo "No changes to commit"
+            git commit .github/main.yml -m 'Update .github/main.yml' || echo "No changes to commit"
+            git push --set-upstream origin "tic-update${{ env.nv }}"
+            head="${{ github.repository_owner }}:tic-update${{ env.nv }}"
+            # https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions
+            generate_pr_data()
+            {
+            cat <<EOF
+            {
+            "title": "Update tic templates",
+            "body": "tic needs to be updated. :rocket: \n",
+            "head": "$head",
+            "base": "master"
+            }
+            EOF
+            }
+            echo "$(generate_pr_data)"
+            curl --request POST \
+            --url https://api.github.com/repos/${{ github.repository }}/pulls \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            --data "$(generate_pr_data)"
