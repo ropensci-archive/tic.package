@@ -50,18 +50,25 @@ jobs:
             sudo apt install libcurl4-openssl-dev libsodium-dev
             Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
             Rscript -e "remotes::install_github('ropensci/tic@update-yaml', dependencies = TRUE)" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
+
       - name: Update
         run: |
             Rscript -e "tic::update_yml()"
-            git config --global user.email "example@example.com"
-            git config --global user.name "gh-pages committer"
+            git config --local user.email "example@example.com"
+            git config --local user.name "gh-pages committer"
             git checkout -b "tic-update"
             git commit .travis.yml -m 'Update .travis.yml' || echo "No changes to commit"
             git commit .circleci/config.yml -m 'Update .circleci/config.yml' || echo "No changes to commit"
             git commit .github/workflows/main.yml -m 'Update .github/workflows/main.yml' || echo "No changes to commit"
-            git remote add origin https://${{ GITHUB.REPOSITORY }}.git
-            git push --set-upstream origin "tic-update"
-            head="${{ github.repository_owner }}:tic-update"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT1 }}
+
+      - name: Create Pull Request
+        run: |
+           head="${{ github.repository_owner }}:tic-update"
             # https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions
             generate_pr_data()
             {
