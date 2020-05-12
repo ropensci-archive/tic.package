@@ -1,4 +1,5 @@
-# tic documentation to get started: https://ropenscilabs.github.io/tic/
+## tic Circle CI template: linux-macos-windows-deploy
+## revision date: 2020-04-10
 
 version: 2.1
 jobs:

@@ -56,12 +56,13 @@ jobs:
             Rscript -e "tic::update_yml()"
 
       - name: Create Pull Request
-        id: cpr
         uses: peter-evans/create-pull-request@v2
         with:
           token: ${{ secrets.PAT1 }}
+          author: github-actions
           title: "Update tic templates"
-          commit_message: update tic templates
+          commit_message: "update tic templates"
           body: "{tic} templates can be updated :rocket: :robot:"
           branch: update-tic
+          base: master
 
