@@ -59,7 +59,7 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
           token: ${{ secrets.PAT1 }}
-          author: github-actions
+          author: github-actions <github@bot.com>
           title: "Update tic templates"
           commit_message: "update tic templates"
           body: "{tic} templates can be updated :rocket: :robot:"
