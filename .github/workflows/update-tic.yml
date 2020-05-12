@@ -59,7 +59,7 @@ jobs:
             git commit .travis.yml -m 'Update .travis.yml' || echo "No changes to commit"
             git commit .circleci/config.yml -m 'Update .circleci/config.yml' || echo "No changes to commit"
             git commit .github/workflows/main.yml -m 'Update .github/workflows/main.yml' || echo "No changes to commit"
-            git remote add origin https://${{ GITHUB_REPOSITORY }}.git
+            git remote add origin https://${{ GITHUB.REPOSITORY }}.git
             git push --set-upstream origin "tic-update"
             head="${{ github.repository_owner }}:tic-update"
             # https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions
