@@ -72,5 +72,4 @@ jobs:
             echo "$(generate_pr_data)"
             curl --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/pulls \
-            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --data "$(generate_pr_data)"
