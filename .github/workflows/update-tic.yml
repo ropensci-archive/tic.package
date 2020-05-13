@@ -1,5 +1,4 @@
 on:
-  push:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 4 * * *"
@@ -16,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, r: "release" }
+          - { os: macOS-latest, r: "release" }
 
     steps:
       - uses: actions/checkout@v2
@@ -28,41 +27,22 @@ jobs:
           r-version: ${{ matrix.config.r }}
           Ncpus: 4
 
-      # set date/week for use in cache creation
-      # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
-      # - cache R packages daily
-      # - cache ccache weekly -> 'ccache' helps rebuilding the package cache faster
-      - name: "[Cache] Prepare daily timestamp for cache"
-        if: runner.os != 'Windows'
-        id: date
-        run: echo "::set-output name=date::$(date '+%d-%m')"
-
-      - name: "[Cache] Cache R packages"
-        if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v1.1.4
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}-1
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}-1
-
-      - name: Dependencies
+      - name: "[Stage] Dependencies"
         run: |
-            sudo apt install libcurl4-openssl-dev libsodium-dev
+            brew install curl libsodium
             Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
             Rscript -e "remotes::install_github('ropensci/tic@update-yaml', dependencies = TRUE)" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: Update
+      - name: "[Stage] Update YAMLs"
         run: |
             Rscript -e "tic::update_yml()"
 
-      - name: Create Pull Request
+      - name: "[Stage] Create Pull Request"
         uses: peter-evans/create-pull-request@v2
         with:
           token: ${{ secrets.PAT1 }}
-          author: github-actions <github@bot.com>
           title: "Update tic templates"
           commit_message: "update tic templates"
           body: "{tic} templates can be updated :rocket: :robot:"
           branch: update-tic
           base: master
-
