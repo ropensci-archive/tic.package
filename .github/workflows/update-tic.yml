@@ -40,9 +40,9 @@ jobs:
       - name: "[Stage] Create Pull Request"
         uses: peter-evans/create-pull-request@v2
         with:
-          token: ${{ secrets.PAT1 }}
+          token: ${{ secrets.TIC_UPDATE }}
           title: "Update tic templates"
-          commit_message: "update tic templates"
+          commit-message: "update tic templates"
           body: "{tic} templates can be updated :rocket: :robot:"
           branch: update-tic
           base: master
