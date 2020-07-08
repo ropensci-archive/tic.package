@@ -21,13 +21,13 @@ jobs:
     - name: Save docker image
       run: docker save -o ./image pats22/tic
     - name: Upload docker image
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: tic-image
         path: image
         pull-image:
         needs: create-docker-image
-      runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
     - name: Download docker image
       uses: actions/download-artifact@v2
       with:
