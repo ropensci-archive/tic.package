@@ -17,6 +17,26 @@ jobs:
     - uses: actions/checkout@v2
     - uses: docker://pats22/tic:3.6.3
 
+    # cache image across runs: https://github.community/t/cache-a-docker-image-built-in-workflow/16260/9
+    - name: Save docker image
+      run: docker save -o ./image pats22/tic
+    - name: Upload docker image
+      uses: actions/upload-artifact@v1
+      with:
+      name: tic-image
+      path: image
+      pull-image:
+      needs: create-docker-image
+      runs-on: ubuntu-latest
+    - name: Download docker image
+      uses: actions/download-artifact@v2
+      with:
+      name: airflow-image
+    - name: load image
+      run: docker load -i ./tic-image/image
+    - name: run image
+      run: docker run pats22/tic
+
     - uses: r-lib/actions/setup-pandoc@master
 
     # for some strange Windows reason this step and the next one need to be decoupled
