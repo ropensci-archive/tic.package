@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest # linux required if you want to use docker
     steps:
     - uses: actions/checkout@v2
-    - uses: docker://pats22/tic-stages:latest
+    - uses: docker://pats22/tic-stages
 
     - uses: r-lib/actions/setup-pandoc@master
 
