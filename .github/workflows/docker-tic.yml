@@ -31,7 +31,7 @@ jobs:
     - name: Download docker image
       uses: actions/download-artifact@v2
       with:
-      name: airflow-image
+        name: tic-image
     - name: load image
       run: docker load -i ./tic-image/image
     - name: run image
