@@ -1,6 +1,12 @@
 ## tic GitHub Actions template: linux-macos-windows-deploy
 ## revision date: 2020-06-14
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Reason for run (optional)'
+        required: false
+        default: 'Manual CI run'
   push:
   pull_request:
   # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
