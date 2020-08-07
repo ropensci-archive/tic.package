@@ -10,3 +10,5 @@
 ^depends\.Rds$
 ^\.ccache$
 ^clang-.*
+^cran-comments\.md$
+^CRAN-RELEASE$

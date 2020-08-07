@@ -4,7 +4,9 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
+
 
 # Thumbnails
 ._*
@@ -99,7 +101,9 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
+
 
 # Thumbnails
 ._*
@@ -129,3 +133,4 @@ Temporary Items
 
 # Local History for Visual Studio Code
 .history/
+CRAN-RELEASE
