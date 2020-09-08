@@ -88,16 +88,16 @@
 <ol>
 <li>
 <p>Use <code>usethis::create_package("&lt;path-to-package-dir&gt;")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
-<div class="sourceCode" id="cb1"><pre class="r">usethis::create_package("~/git/tic.package")
-✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
-✔ Creating 'R/'
-✔ Creating 'man/'
-✔ Writing 'DESCRIPTION'
-✔ Writing 'NAMESPACE'
-✔ Writing 'tic.package.Rproj'
-✔ Adding '.Rproj.user' to '.gitignore'
-✔ Adding '^tic.package\\.Rproj$', '^\\.Rproj\\.user$' to '.Rbuildignore'
-✔ Opening new project 'tic.package' in RStudio</pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>usethis<span class="op">::</span><span class="kw">create_package</span>(<span class="st">"~/git/tic.package"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>✔ Creating <span class="st">'R/'</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>✔ Creating <span class="st">'man/'</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>✔ Writing <span class="st">'DESCRIPTION'</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>✔ Writing <span class="st">'NAMESPACE'</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>✔ Writing <span class="st">'tic.package.Rproj'</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>✔ Adding <span class="st">'.Rproj.user'</span> to <span class="st">'.gitignore'</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>✔ Adding <span class="st">'^tic.package</span><span class="ch">\\</span><span class="st">.Rproj$'</span>, <span class="st">'^</span><span class="ch">\\</span><span class="st">.Rproj</span><span class="ch">\\</span><span class="st">.user$'</span> to <span class="st">'.Rbuildignore'</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>✔ Opening new project <span class="st">'tic.package'</span> <span class="cf">in</span> RStudio</span></code></pre></div>
 </li>
 <li>
 <p>Initialize Git via <code>usethis::use_git()</code>:</p>
@@ -121,35 +121,35 @@ Selection: 1</code></pre>
 </li>
 <li>
 <p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
-✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
-✔ Setting RoxygenNote field in DESCRIPTION to '6.0.1.9000'
-● Run `devtools::document()`</pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>✔ Setting Roxygen field <span class="cf">in</span> DESCRIPTION to <span class="st">'list(markdown = TRUE)'</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>✔ Setting RoxygenNote field <span class="cf">in</span> DESCRIPTION to <span class="st">'6.0.1.9000'</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>● Run <span class="st">`</span><span class="dt">devtools::document()</span><span class="st">`</span></span></code></pre></div>
 </li>
 <li>
 <p>Add a license: <code>usethis::add_gpl3_license()</code> (or any license of your choice):</p>
-<div class="sourceCode" id="cb4"><pre class="r">✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
-✔ Setting License field in DESCRIPTION to 'GPL-3'
-✔ Writing 'LICENSE.md'
-✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'</pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>✔ Setting License field <span class="cf">in</span> DESCRIPTION to <span class="st">'GPL-3'</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>✔ Writing <span class="st">'LICENSE.md'</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>✔ Adding <span class="st">'^LICENSE</span><span class="ch">\\</span><span class="st">.md$'</span> to <span class="st">'.Rbuildignore'</span></span></code></pre></div>
 </li>
 <li>
 <p>Create a Github repo by using <code>usethis::use_github()</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="r">● Check title and description
-  Name:        tic.package
-  Description: What the Package Does (One Line, Title Case)
-Are title and description ok?
-1: No way
-2: I agree
-3: Nope
-
-Selection: 2
-✔ Creating GitHub repository
-✔ Adding GitHub remote
-✔ Adding GitHub links to DESCRIPTION
-✔ Setting URL field in DESCRIPTION to 'https://github.com/&lt;user&gt;/tic.package'
-✔ Setting BugReports field in DESCRIPTION to 'https://github.com/&lt;user&gt;/tic.package/issues'
-✔ Pushing to GitHub and setting remote tracking branch</pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>● Check title and description</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  Name<span class="op">:</span><span class="st">        </span>tic.package</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  Description<span class="op">:</span><span class="st"> </span>What the Package <span class="kw">Does</span> (One Line, Title Case)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>Are title and description ok?</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>No way</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>I agree</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Nope</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>Selection<span class="op">:</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>✔ Creating GitHub repository</span>
+<span id="cb5-11"><a href="#cb5-11"></a>✔ Adding GitHub remote</span>
+<span id="cb5-12"><a href="#cb5-12"></a>✔ Adding GitHub links to DESCRIPTION</span>
+<span id="cb5-13"><a href="#cb5-13"></a>✔ Setting URL field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package'</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>✔ Setting BugReports field <span class="cf">in</span> DESCRIPTION to <span class="st">'https://github.com/&lt;user&gt;/tic.package/issues'</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>✔ Pushing to GitHub and setting remote tracking branch</span></code></pre></div>
 </li>
 <li><p>Set up Continuous Integration by using <code><a href="https://docs.ropensci.org/tic/reference/use_tic.html">tic::use_tic()</a></code>. Take a look at the <a href="https://ropenscilabs.github.io/tic/articles/tic.html">Getting Started</a> vignette of the <a href="https://github.com/ropenscilabs/tic">tic</a> package for a detailed walkthrough.</p></li>
 </ol>
@@ -198,7 +198,7 @@ Selection: 2
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
