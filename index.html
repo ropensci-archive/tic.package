@@ -77,7 +77,7 @@
 <a href="#set-up-an-operational-fork-of-this-repository" class="anchor"></a>Set up an operational fork of this repository</h2>
 <p>If you want to experiment with <em>travis</em> and <em>tic</em> for a R package, you can fork it.</p>
 <ol>
-<li>Use <code>usethis::create_from_github()</code> to automatically create a fork of this repo. If you use RStudio, a new RStudio project will open. You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if you’re having problems. (It’s definitely worth getting this function running as it saves you a lot of time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github).</li>
+<li>Use <code><a href="https://usethis.r-lib.org/reference/create_from_github.html">usethis::create_from_github()</a></code> to automatically create a fork of this repo. If you use RStudio, a new RStudio project will open. You may need to set up your SSH credentials first. See <a href="http://happygitwithr.com/ssh-keys.html">this guide</a> if you’re having problems. (It’s definitely worth getting this function running as it saves you a lot of time in the future!) Alternatively, fork this repo on Github and then create a new R Project within RStudio (File -&gt; New Project -&gt; Version Control -&gt; Github).</li>
 <li>Run <code><a href="https://docs.ropensci.org/tic/reference/use_tic.html">tic::use_tic()</a></code> to set up all requirements needed for the CI integration of your package.</li>
 </ol>
 </div>
@@ -87,7 +87,7 @@
 <p>This is the detailed way going step by step from the bottom up. Looking here can be useful if you already have an R package and just want to add some functionality to it, e.g. using <em>roxygen2</em> with Markdown (item 3) or enabling CI for your package (item 6).</p>
 <ol>
 <li>
-<p>Use <code>usethis::create_package("&lt;path-to-package-dir&gt;")</code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
+<p>Use <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package("&lt;path-to-package-dir&gt;")</a></code>. Here is an example with a package called <code>tic.package</code> stored within the <code>~/git/</code> directory:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>usethis<span class="op">::</span><span class="kw">create_package</span>(<span class="st">"~/git/tic.package"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>✔ Creating <span class="st">'R/'</span></span>
@@ -100,7 +100,7 @@
 <span id="cb1-10"><a href="#cb1-10"></a>✔ Opening new project <span class="st">'tic.package'</span> <span class="cf">in</span> RStudio</span></code></pre></div>
 </li>
 <li>
-<p>Initialize Git via <code>usethis::use_git()</code>:</p>
+<p>Initialize Git via <code><a href="https://usethis.r-lib.org/reference/use_git.html">usethis::use_git()</a></code>:</p>
 <pre><code>✔ Changing active project to '/home/&lt;username&gt;/git/tic.package'
 ✔ Initialising Git repo
 ✔ Adding '.Rhistory', '.RData' to '.gitignore'
@@ -120,7 +120,7 @@ Selection: 1
 Selection: 1</code></pre>
 </li>
 <li>
-<p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code>usethis::use_roxygen_md()</code>:</p>
+<p>(Optional) Use <em>roxygen2</em> with Markdown support for package documentation: <code><a href="https://usethis.r-lib.org/reference/use_roxygen_md.html">usethis::use_roxygen_md()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>✔ Changing active project to <span class="st">'/home/&lt;username&gt;/git/tic.package'</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>✔ Setting Roxygen field <span class="cf">in</span> DESCRIPTION to <span class="st">'list(markdown = TRUE)'</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>✔ Setting RoxygenNote field <span class="cf">in</span> DESCRIPTION to <span class="st">'6.0.1.9000'</span></span>
@@ -134,7 +134,7 @@ Selection: 1</code></pre>
 <span id="cb4-4"><a href="#cb4-4"></a>✔ Adding <span class="st">'^LICENSE</span><span class="ch">\\</span><span class="st">.md$'</span> to <span class="st">'.Rbuildignore'</span></span></code></pre></div>
 </li>
 <li>
-<p>Create a Github repo by using <code>usethis::use_github()</code>:</p>
+<p>Create a Github repo by using <code><a href="https://usethis.r-lib.org/reference/use_github.html">usethis::use_github()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>● Check title and description</span>
 <span id="cb5-2"><a href="#cb5-2"></a>  Name<span class="op">:</span><span class="st">        </span>tic.package</span>
 <span id="cb5-3"><a href="#cb5-3"></a>  Description<span class="op">:</span><span class="st"> </span>What the Package <span class="kw">Does</span> (One Line, Title Case)</span>
