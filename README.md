@@ -9,7 +9,7 @@
 
 A minimal example package with _pkgdown_ documentation created and uploaded by [_tic_](https://github.com/ropenscilabs/tic) (the _pkgdown_ documentation is written to, and served from, the `docs` directory of the `master` branch.).
 _tic_ is an R package for CI-agnostic workflow definitions for various R projects. 
-See its [documentation](https://ropenscilabs.github.io/tic/) for more information.
+See its [documentation](https://docs.ropensci.org/tic/) for more information.
 
 ## Set up an operational fork of this repository
 
@@ -104,4 +104,4 @@ Looking here can be useful if you already have an R package and just want to add
     ✔ Pushing to GitHub and setting remote tracking branch
     ```
 
-6. Set up Continuous Integration by using `tic::use_tic()`. Take a look at the [Getting Started](https://ropenscilabs.github.io/tic/articles/tic.html) vignette of the [tic](https://github.com/ropenscilabs/tic) package for a detailed walkthrough.
+6. Set up Continuous Integration by using `tic::use_tic()`. Take a look at the [Getting Started](https://docs.ropensci.org/tic/articles/tic.html) vignette of the [tic](https://github.com/ropenscilabs/tic) package for a detailed walkthrough.
